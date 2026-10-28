@@ -33,3 +33,4 @@ HTML, CSS, JavaScript, jQuery, Typed.js and Cloudflare Workers
 - Email: chauhansahil03115@gmail.com
 - LinkedIn: https://www.linkedin.com/in/sahil-chauhan-490b0021a/
 - GitHub: https://github.com/Chauhansahiil
+![Portfolio preview](preview.png)
