@@ -1,20 +1,33 @@
-# Portfolio
+# Sahil Chauhan | Data Analyst Portfolio
 
-Static site (HTML, CSS, JS) plus a tiny Cloudflare Worker that holds the private values.
+Personal portfolio website for Sahil Chauhan, a B.Tech graduate in Artificial Intelligence from Nagpur, India, looking for Data Analyst roles.
 
-## What is kept out of GitHub
-- SheetDB URL -> Worker secret `SHEETDB_URL`
-- Resume link -> Worker secret `RESUME_URL` (the site links to `<worker>/resume`)
-- Nothing secret is in `index.html`, `script.js`, `enhance.js` or `config.js`.
+**Live site:** https://chauhansahiil.github.io/portfolio/
 
-## One-time setup (about 5 minutes)
-1. In SheetDB, create a **new** API endpoint (the old URL was in your old code, so treat it as used) and, if you can, turn on SheetDB's own protection.
-2. In this folder: `cd worker`, then `npx wrangler login`.
-3. `npx wrangler secret put SHEETDB_URL` (paste the new SheetDB URL)
-4. `npx wrangler secret put RESUME_URL` (paste your Google Drive resume link)
-5. Edit `ALLOWED_ORIGINS` in `worker/wrangler.toml` to your real site address, then `npx wrangler deploy`.
-6. Copy the printed `https://portfolio-api.<you>.workers.dev` address into `WORKER_URL` in `config.js`.
-7. Commit and push. Turn on GitHub Pages for the repo.
+## Features
+- Sections for about, experience, projects, skills, certifications, education and contact
+- Scroll animations, a cursor-reactive background and a timeline that draws itself as you scroll
+- AI assistant (press Ctrl+K) that answers questions about my projects, skills, education and resume
+- Contact form with validation, saved to Google Sheets through a small Cloudflare Worker, so no private links are stored in this repository
 
-## Local testing
-Live Server on port 5501 is already allowed. Until the Worker is deployed the contact form shows a "not connected" message and the resume button jumps to Contact.
+## Built with
+HTML, CSS, JavaScript, jQuery, Typed.js and Cloudflare Workers.
+
+## Run locally
+1. Clone the repository.
+2. Open `index.html` with a local server such as VS Code Live Server.
+
+The contact form and resume download need a deployed Worker (see below), so they show a "not connected" message locally until you set one up.
+
+## Set up your own Worker (optional)
+1. Create a SheetDB API connected to a sheet with the columns `Name`, `Email`, `Phone No.` and `Message`.
+2. In the `worker` folder, run `npx wrangler login`.
+3. Run `npx wrangler secret put SHEETDB_URL` and paste your SheetDB URL.
+4. Run `npx wrangler secret put RESUME_URL` and paste your resume link.
+5. Set `ALLOWED_ORIGINS` in `worker/wrangler.toml` to your site address, then run `npx wrangler deploy`.
+6. Put the printed Worker address into `WORKER_URL` in `config.js`.
+
+## Contact
+- Email: chauhansahil03115@gmail.com
+- LinkedIn: https://www.linkedin.com/in/sahil-chauhan-490b0021a/
+- GitHub: https://github.com/Chauhansahiil
