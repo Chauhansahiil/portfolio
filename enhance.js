@@ -92,12 +92,17 @@ var box=$('#ai'),msgs=$('#msgs'),inp=$('#ai-in');
 function add(h,me){var d=document.createElement('div');d.className='m '+(me?'me':'bot');if(me)d.textContent=h;else d.innerHTML=h;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;return d}
 function match(q){var w=q.toLowerCase().replace(/[^a-z0-9. ]/g,' ').split(/\s+/).filter(Boolean),best=null,top=0;
   KB.forEach(function(e){var s=0,ks=e.k.split(' ');w.forEach(function(t){if(t.length>1&&ks.some(function(k){return k===t||(t.length>3&&(k.indexOf(t)===0||t.indexOf(k)===0))}))s++});if(s>top){top=s;best=e}});return best}
+var hist=[],AI=C.AI_ENDPOINT||(C.WORKER_URL?C.WORKER_URL+'/chat':'');
+function fmt(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/(https?:\/\/[^\s)]+[^\s).,;:])/g,'<a href="$1" target="_blank" rel="noopener">$1</a>').replace(/\n/g,'<br>')}
 function ask(q){q=q.trim();if(!q)return;add(q,true);var t=add('<span class="dots"><i></i><i></i><i></i></span>');
-  function say(h){setTimeout(function(){t.innerHTML=h;msgs.scrollTop=msgs.scrollHeight},calm?0:550)}
+  function say(h){setTimeout(function(){t.innerHTML=h;msgs.scrollTop=msgs.scrollHeight},calm?0:300)}
   var hit=match(q),fb='I only know what is on this portfolio. Try asking about his projects, skills, experience, education or resume, or '+A('#contact','message Sahil directly')+'.';
-  if(hit)return say(hit.a);
-  if(C.AI_ENDPOINT)fetch(C.AI_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q})}).then(function(r){return r.json()}).then(function(j){say(j.answer||fb)}).catch(function(){say(fb)});
-  else say(fb)}
+  if(hit&&/^resume/.test(hit.k))return say(hit.a);
+  if(!AI)return say(hit?hit.a:fb);
+  fetch(AI,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q,history:hist.slice(-6)})})
+   .then(function(r){if(!r.ok)throw 0;return r.json()})
+   .then(function(j){if(!j.answer)throw 0;hist.push({role:'user',content:q},{role:'assistant',content:j.answer});say(fmt(j.answer))})
+   .catch(function(){say(hit?hit.a:fb)})}
 function openAI(v){box.hidden=!v;$('#ai-fab').style.display=v?'none':'';if(v){inp.focus();if(!msgs.children.length){add('Hi, I\'m Sahil\'s AI assistant. Ask me about his projects, skills, experience or education, or ask for his resume.');
   CH.forEach(function(c){var b=document.createElement('button');b.type='button';b.textContent=c;b.onclick=function(){ask(c)};$('#chips').appendChild(b)})}}}
 $$('[data-open-ai]').forEach(function(b){b.addEventListener('click',function(){openAI(true)})});
