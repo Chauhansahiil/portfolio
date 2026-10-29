@@ -34,8 +34,17 @@ $$(cards).forEach(function(el){
   el.classList.add('fx');var g=document.createElement('span');g.className='glare';el.appendChild(g);
   el.addEventListener('pointermove',function(e){var r=el.getBoundingClientRect();el.style.setProperty('--mx',(e.clientX-r.left)+'px');el.style.setProperty('--my',(e.clientY-r.top)+'px');
     if(fine&&!calm&&!el.matches('form,.edu-row')){var px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;el.classList.add('tilting');el.style.transform='perspective(900px) rotateY('+px*8+'deg) rotateX('+(-py*8)+'deg) scale(1.02)'}});
-  el.addEventListener('pointerleave',function(){el.style.transform='';});
+  el.addEventListener('pointerleave',function(){el.classList.remove('tilting');el.style.transform='';});
 });
+
+/* education: score rings that fill when they scroll into view */
+$$('.edu-row').forEach(function(r){var s=$('.edu-score',r);if(!s)return;var t=s.textContent,m=t.match(/([\d.]+)\s*(?:\/\s*([\d.]+))?\s*(%)?/);if(!m)return;
+  var v=parseFloat(m[1]),mx=m[2]?parseFloat(m[2]):100,p=Math.max(0,Math.min(1,v/mx));
+  var d=document.createElement('div');d.className='edu-ring';d.setAttribute('role','img');d.setAttribute('aria-label',t.trim());d.style.setProperty('--p',p);
+  d.innerHTML='<svg viewBox="0 0 120 120" aria-hidden="true"><circle class="rt" cx="60" cy="60" r="52"/><circle class="rf" cx="60" cy="60" r="52"/></svg><div><b>'+(m[3]?Math.round(v)+'%':v.toFixed(2))+'</b><small>'+(m[3]?'XII score':'CGPA / '+mx)+'</small></div>';
+  r.appendChild(d);
+  if(calm||!('IntersectionObserver'in window)){d.classList.add('on');return}
+  new IntersectionObserver(function(es,o){es.forEach(function(x){if(x.isIntersecting){setTimeout(function(){d.classList.add('on')},350);o.disconnect()}})},{threshold:.5}).observe(d)});
 
 /* magnetic buttons */
 if(fine&&!calm)$$('.home-content a,.about-btns a,.button-area button,#ai-fab').forEach(function(b){
@@ -46,7 +55,7 @@ if(fine&&!calm)$$('.home-content a,.about-btns a,.button-area button,#ai-fab').f
 if(!calm&&'IntersectionObserver'in window){
   var map=[['section .title','rv'],['.about .left','rv rv-l'],['.about .right','rv rv-r'],['.experience-item:nth-child(odd)','rv rv-l'],['.experience-item:nth-child(even)','rv rv-r'],
    ['.services .card','rv'],['.skills .column .text,.skills .column>p','rv'],['.group-label','rv rv-l'],['.tools','rv'],['.cert-card','rv'],['.edu-row:nth-child(odd)','rv rv-l'],['.edu-row:nth-child(even)','rv rv-r'],
-   ['.course-head,.course-sub','rv'],['.course-panel','rv'],['.contact .column.left','rv rv-l'],['.contact .column.right','rv rv-r']];
+   ['.course-head,.course-sub','rv'],['.course-panel li','rv'],['.course-panel','rv'],['.contact .column.left','rv rv-l'],['.contact .column.right','rv rv-r']];
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var el=e.target;el.classList.add('in');io.unobserve(el);
     setTimeout(function(){el.classList.remove('rv','rv-l','rv-r','in');el.style.removeProperty('--d')},1700)}})},{threshold:.15,rootMargin:'0px 0px -6% 0px'});
   map.forEach(function(m){$$(m[0]).forEach(function(el,i){var kids=el.parentNode.children,idx=[].indexOf.call(kids,el);el.className+=' '+m[1];el.style.setProperty('--d',Math.min(idx,5)*.12+'s');io.observe(el)})})}
