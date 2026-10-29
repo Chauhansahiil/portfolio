@@ -23,7 +23,7 @@ if(!fine)$('#glow').style.display='none';
   addEventListener('resize',size);size();draw()})();
 
 /* background orbs (parallax) */
-var secs=['.about','.experience','.services','.skills','.certifications','.education','.contact'];
+var secs=['.about','.experience','.services','.skills','.certifications','.education','.fit','.contact'];
 var orbs=[];
 secs.forEach(function(s){var el=$(s);if(!el)return;['a','b'].forEach(function(k,i){var o=document.createElement('i');o.className='orb '+k;el.insertBefore(o,el.firstChild);orbs.push({o:o,s:el,v:i?.12:-.1})})});
 
@@ -51,6 +51,7 @@ if(!calm&&'IntersectionObserver'in window){
     setTimeout(function(){el.classList.remove('rv','rv-l','rv-r','in');el.style.removeProperty('--d')},1700)}})},{threshold:.15,rootMargin:'0px 0px -6% 0px'});
   map.forEach(function(m){$$(m[0]).forEach(function(el,i){var kids=el.parentNode.children,idx=[].indexOf.call(kids,el);el.className+=' '+m[1];el.style.setProperty('--d',Math.min(idx,5)*.12+'s');io.observe(el)})})}
 
+setTimeout(function(){$$('.title.rv').forEach(function(t){var r=t.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0)t.classList.add('in')})},1800);
 /* experience: tags stagger index */
 $$('.experience-item .tech-tags').forEach(function(t){$$('span',t).forEach(function(s,i){s.style.setProperty('--i',i)})});
 var exp=$('.exp-content'),dot;if(exp){dot=document.createElement('div');dot.className='exp-dot';exp.appendChild(dot)}
@@ -65,6 +66,58 @@ function frame(){tick=false;
     $$('.experience-item',exp).forEach(function(it){it.classList.toggle('lit',it.getBoundingClientRect().top<innerHeight*.62)})}}
 addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(frame)}},{passive:true});addEventListener('resize',frame);frame();
 
+/* ---------- job fit checker (runs only in the browser, nothing is sent) ---------- */
+(function(){var inp=$('#fit-in'),out=$('#fit-out');if(!inp)return;
+ var SK=[
+  ['SQL',/\bsql\b|mysql|postgres|t-?sql/i,'Strong SQL: CTEs, window functions and subqueries in his Customer Trends project, plus MySQL at Tenet.'],
+  ['Python',/\bpython\b/i,'Python with Pandas and NumPy (about 4 out of 5 for analytics work), used at CodeSoft and in his projects.'],
+  ['Pandas / NumPy',/pandas|numpy/i,'Used for cleaning and analysis at CodeSoft and in Customer Trends.'],
+  ['Power BI / DAX',/power ?bi|\bdax\b/i,'Built an interactive Power BI dashboard; DAX is in his skill set.'],
+  ['Tableau',/tableau/i,'He knows Tableau; Power BI is the tool he has used most.'],
+  ['Excel',/excel|pivot|vlookup|spreadsheet/i,'Pivot tables (beginner to pro at KultureHire), VLOOKUP and data cleaning frameworks.'],
+  ['Data cleaning and EDA',/data clean|cleaning|\beda\b|exploratory|preprocess|data prep|wrangl/i,'Cleaning and EDA in Pandas, and standardisation frameworks at KultureHire.'],
+  ['Dashboards and visualization',/dashboard|visuali[sz]|reporting/i,'Power BI dashboard, Seaborn, and Excel and Power BI reporting.'],
+  ['Statistics',/statistic|hypothesis|probability|a\/b test/i,'Statistics and Probability coursework.'],
+  ['Machine learning',/machine learning|\bml\b|scikit|sklearn|feature engineering/i,'ML coursework (neural networks, reinforcement learning, NLP, computer vision) and feature engineering.'],
+  ['Deep learning',/deep learning|pytorch|tensorflow|neural network/i,'NVIDIA Fundamentals of Deep Learning; PyTorch and TensorFlow in his skills.'],
+  ['GenAI / LLMs',/gen ?ai|generative|\bllms?\b|\brag\b|prompt/i,'GenAI, LLM and RAG are in his skill set.'],
+  ['NLP',/\bnlp\b|natural language/i,'NLP coursework.'],
+  ['R',/\br programming|\br language|\brstudio|\br,/i,'R is listed in his programming skills.'],
+  ['C++',/c\+\+/i,'C++ is listed in his programming skills.'],
+  ['JavaScript / React',/javascript|\breact\b|\bhtml\b|\bcss\b/i,'Front-end work with HTML, CSS, JavaScript and React at Tenet.'],
+  ['Node.js / Express',/node\.?js|express/i,'Back-end work with Node.js and Express at Tenet.'],
+  ['REST APIs',/\brest\b|\bapis?\b/i,'API integration at Tenet; REST API is in his skills.'],
+  ['MongoDB',/mongo/i,'MongoDB at Tenet.'],
+  ['Snowflake',/snowflake/i,'Snowflake is in his database skills.'],
+  ['AWS',/\baws\b|amazon web/i,'AWS is listed in his cloud skills.'],
+  ['CI/CD',/ci ?\/ ?cd/i,'CI/CD is listed in his skills.'],
+  ['Git / GitHub',/\bgit\b|github/i,'His projects are public on GitHub.'],
+  ['Blockchain / Web3',/blockchain|web3|ethereum|smart contract/i,'Co-authored a published paper, MetaMask and Web3.js, and an Ethereum developer certificate.']];
+ var GAP=[
+  ['Looker',/looker/i,'Power BI or Tableau'],['Qlik',/qlik/i,'Power BI or Tableau'],['Spark / PySpark',/spark/i,'Python, Pandas and SQL'],
+  ['Hadoop',/hadoop/i,'SQL and Snowflake'],['Kafka',/kafka/i,'Python and REST APIs'],['Airflow',/airflow/i,'Python and CI/CD'],['dbt',/\bdbt\b/i,'SQL and Snowflake'],
+  ['Azure',/azure/i,'AWS and Snowflake'],['Google Cloud / BigQuery',/\bgcp\b|google cloud|bigquery/i,'AWS and Snowflake'],['Redshift',/redshift/i,'Snowflake and SQL'],
+  ['Databricks',/databricks/i,'Python and Snowflake'],['Docker / Kubernetes',/docker|kubernetes/i,'CI/CD and AWS'],['Java',/\bjava\b/i,'JavaScript and Python'],
+  ['Scala',/scala/i,'Python'],['SAS / SPSS',/\bsas\b|spss/i,'Python and R'],['MATLAB',/matlab/i,'Python and R'],['Alteryx / Informatica / Talend',/alteryx|informatica|talend/i,'Python and SQL'],
+  ['SSIS / SSRS',/ssis|ssrs/i,'SQL']];
+ var SAMPLE="Data Analyst\nWe are looking for a Data Analyst with 1+ years of experience. You will build dashboards in Power BI or Tableau, write SQL queries to answer business questions, clean data using Python (Pandas) and Excel, and present insights to stakeholders. Nice to have: Azure, Airflow.";
+ function li(n,t){return'<li><b>'+n+'</b><span>'+t+'</span></li>'}
+ function show(h){out.innerHTML=h;out.hidden=false;out.scrollIntoView({behavior:calm?'auto':'smooth',block:'nearest'})}
+ function run(){var t=inp.value.trim();
+  if(t.length<25)return show('<p class="fit-note">Please paste a longer job description so the comparison is meaningful.</p>');
+  var hit=SK.filter(function(s){return s[1].test(t)}),miss=GAP.filter(function(s){return s[1].test(t)});
+  var yrs=0,m,re=/(\d{1,2})\s*\+?\s*(?:-|to)?\s*\d{0,2}\s*\+?\s*(?:years|yrs)/gi;while((m=re.exec(t))){var n=parseInt(m[1],10);if(n>yrs&&n<=20)yrs=n}
+  var total=hit.length+miss.length;
+  if(!total)return show('<p class="fit-note">I could not recognise common data or software skills in that text. Try pasting the requirements section of the job description.</p>');
+  var h='<p class="fit-sum"><b>'+hit.length+' of '+total+'</b> skills found in this description are on Sahil\'s list</p><div class="fit-cols">'+
+   '<div class="fit-col ok"><h4>Where he fits</h4><ul>'+(hit.length?hit.map(function(s){return li(s[0],s[2])}).join(''):'<li><span>No direct matches found.</span></li>')+'</ul></div>'+
+   '<div class="fit-col no"><h4>Not on his list yet</h4><ul>'+(miss.length?miss.map(function(s){return li(s[0],'Not listed. Closest he works with: '+s[2]+'.')}).join(''):'<li><span>No gaps found among the tools I check for.</span></li>')+'</ul></div></div>';
+  if(yrs>=2)h+='<p class="fit-note">This description mentions '+yrs+'+ years of experience. Sahil graduated in 2025 and has three internships, a published paper and end-to-end projects.</p>';
+  h+='<div class="fit-cta"><a class="pillbtn" href="'+resume+'"'+(resume[0]==='#'?'':' target="_blank" rel="noopener"')+'>Download resume</a><a class="pillbtn ghost" href="#contact">Contact Sahil</a><button type="button" class="pillbtn ghost" id="fit-ai">Ask the AI more</button></div><p class="fit-priv">This is a keyword comparison against his portfolio, not a hiring decision.</p>';
+  show(h);var b=$('#fit-ai');if(b)b.onclick=function(){openAI(true)}}
+ $('#fit-run').onclick=run;$('#fit-sample').onclick=function(){inp.value=SAMPLE;cnt();run()};
+ function cnt(){$('#fit-count').textContent=inp.value.length+' / 6000'}inp.addEventListener('input',cnt)})();
+
 /* ---------- AI assistant (answers come from your own portfolio content) ---------- */
 var A=function(h,t){return'<a href="'+h+'"'+(h[0]==='#'?'':' target="_blank" rel="noopener"')+'>'+t+'</a>'};
 var GH='https://github.com/Chauhansahiil',LI='https://www.linkedin.com/in/sahil-chauhan-490b0021a/';
@@ -73,6 +126,7 @@ var KB=[
  {k:'resume cv download pdf',det:1,a:"Here is Sahil's resume: "+A(resume,'Download resume')},
  {k:'salary ctc lpa expectation compensation',det:1,a:"Sahil is looking for around 4.5 LPA, and he is open to a conversation based on the role, the responsibilities and the growth opportunities."},
  {k:'visa sponsorship authorisation authorization permit sponsor',det:1,a:"For roles in India, Sahil does not need any visa or sponsorship. For roles outside India, he would need visa sponsorship."},
+ {k:'jd description checker',det:1,a:"Paste a job description into the "+A('#fit','Check the fit')+" section and you will see which of Sahil's skills match and where the gaps are. It runs in your browser and nothing is stored."},
  {k:'why hire choose reasons candidate fit',a:"Three reasons. First, hands-on analysis work: as a Data Analyst Intern at KultureHire he built data cleaning and standardisation frameworks in Excel and Power BI. Second, end-to-end project work: his Customer Trends Analysis project covers Pandas cleaning, SQL analysis and a Power BI dashboard. Third, an AI degree with Accenture, IBM and NVIDIA certifications. "+A('#services','See his projects')+"."},
  {k:'different unique stand apart freshers fresher special edge',a:"What sets Sahil apart is the mix. He has an AI degree, three internships across Python, data analysis and full-stack development, an end-to-end SQL, Python and Power BI project, and a co-authored research paper on blockchain banking. That range helps him understand how data is created and moves through applications, not just how it is analysed. He also learns quickly: at KultureHire he went from beginner to pro level in pivot table analysis."},
  {k:'strengths strength weakness weaknesses improve',a:"Sahil's strengths are the full analytics workflow, from cleaning data in Pandas to answering business questions in SQL and presenting them in Power BI, and learning quickly. He has also collaborated in a team on a published paper. A weakness he is working on is limited experience with large real-world business datasets, since most of his hands-on work is at project and internship scale. He is addressing it with larger end-to-end projects and by looking for a role with real business data."},
@@ -118,7 +172,7 @@ var ROLES={
 function roleOf(s){if(/agentic|agent/.test(s))return'ag';if(/genai|gen ai|generative|llm/.test(s))return'gen';if(/data|analyst|analytics|business|\bbi\b/.test(s))return'da';if(/software|developer|full.?stack/.test(s))return'sw';if(/\bai\b|\bml\b|machine/.test(s))return'ai';return''}
 function future(q){var s=q.toLowerCase();if(!/see (him|himself|yourself)|3 to 5|5 years|five years|three years|3 years|next few years|future|goals?|aspir|ambition|long.?term/.test(s))return'';var r=roleOf(s);if(r)return ROLES[r];
   return'Happy to share. Which role do you have in mind? '+ROLEBTN.map(function(b){return'<button type="button" class="rolebtn" data-q="Where does he see himself in 3 to 5 years as '+b[1]+'?">'+b[0]+'</button>'}).join(' ')}
-var CH=['Why hire Sahil?','Best project','Availability','Get his resume','What are his skills?','How can I contact him?'];
+var CH=['Why hire Sahil?','Best project','Availability','Get his resume','Match a job description','How can I contact him?'];
 var NOPE={looker:'Power BI for dashboards',qlik:'Power BI for dashboards',azure:'AWS and Snowflake',gcp:'AWS and Snowflake',bigquery:'Snowflake and SQL',redshift:'Snowflake and SQL',spark:'Python, Pandas and SQL',pyspark:'Python, Pandas and SQL',hadoop:'SQL and Snowflake',kafka:'Python and REST APIs',airflow:'Python and CI/CD',dbt:'SQL and Snowflake',docker:'CI/CD and AWS',kubernetes:'CI/CD and AWS',scala:'Python and R',matlab:'Python and R',sas:'Python and R',spss:'Python and R'};
 function toolCheck(q){var w=q.toLowerCase().replace(/[^a-z0-9 ]/g,' ').split(/\s+/);for(var i=0;i<w.length;i++)if(NOPE[w[i]])return w[i].charAt(0).toUpperCase()+w[i].slice(1)+' is not on Sahil\'s skills list yet. The closest he works with is '+NOPE[w[i]]+'. '+A('#Skills','See his skills')+'.';return''}
 var box=$('#ai'),msgs=$('#msgs'),inp=$('#ai-in');

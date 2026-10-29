@@ -280,6 +280,23 @@
     </section>
 
     <!-- contact section start -->
+    <!-- job fit checker -->
+    <section class="fit" id="fit">
+        <div class="max-width">
+            <h2 class="title">Check the fit</h2>
+            <p class="fit-intro">Paste a job description and see how Sahil's skills line up, including the gaps. It runs in your browser, and nothing is sent or stored.</p>
+            <div class="fit-box">
+                <textarea id="fit-in" maxlength="6000" placeholder="Paste the job description here..." aria-label="Job description"></textarea>
+                <div class="fit-actions">
+                    <button type="button" id="fit-run">Check the fit</button>
+                    <button type="button" id="fit-sample" class="ghost">Try an example</button>
+                    <span id="fit-count">0 / 6000</span>
+                </div>
+            </div>
+            <div id="fit-out" class="fit-out" hidden aria-live="polite"></div>
+        </div>
+    </section>
+
     <section class="contact" id="contact">
         <div class="max-width">
             <h2 class="title">Contact me</h2>

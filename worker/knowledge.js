@@ -6,6 +6,8 @@ Sahil Chauhan is a B.Tech graduate (2025) in Artificial Intelligence, based in N
 Roles he is looking for: Data Analyst and related analytics or business analyst roles, AI / ML, GenAI, Agentic AI, and Software Developer.
 Contact: chauhansahil03115@gmail.com. LinkedIn: https://www.linkedin.com/in/sahil-chauhan-490b0021a/ . GitHub: https://github.com/Chauhansahiil . The website also has a contact form.
 
+THE WEBSITE ALSO HAS a "Check the fit" section where visitors can paste a job description to see which of his skills match and which are gaps.
+
 WHAT MAKES HIM DIFFERENT
 He combines an AI degree with practical experience: three internships (Python, data analysis and full-stack development), an end-to-end SQL, Python and Power BI project, and a co-authored published research paper on blockchain banking. His full-stack background means he understands how data is created and moves through applications, not only how it is analysed. He learns quickly: at KultureHire he went from beginner to pro level in pivot table analysis.
 
