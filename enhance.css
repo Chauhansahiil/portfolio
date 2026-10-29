@@ -96,3 +96,15 @@ kbd{font:500 .7rem 'Poppins',sans-serif;border:1px solid rgba(255,255,255,.35);b
 @media(max-width:800px){.experience .exp-content::after{left:12px}.exp-dot{left:12px}.orb{width:260px;height:260px}kbd{display:none}}
 @media(max-width:500px){#ai-fab{right:14px;bottom:14px}.scroll-up-btn{bottom:76px!important}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important}.rv,.rv.in{transition:none!important;opacity:1!important;transform:none!important;filter:none!important;clip-path:none!important}}
+
+.ai-note{font-size:11.5px;color:rgba(255,255,255,.45);text-align:center;padding:0 14px 8px;margin:0}
+.ai-clear{margin-left:auto;margin-right:10px;font:inherit;font-size:12px;color:#bbb;background:none;border:1px solid rgba(255,255,255,.2);border-radius:99px;padding:3px 12px;cursor:pointer}
+.ai-clear:hover{border-color:crimson;color:#fff}
+@media(max-width:500px){#ai{right:0;bottom:0;width:100%;height:100dvh;max-height:none;border-radius:0}}
+
+.home .home-content a.ai-btn{margin-left:14px;background:transparent;border-color:#fff}
+.home .home-content a.ai-btn:hover{background:crimson;border-color:crimson;color:#fff}
+@media(max-width:500px){.home .home-content a.ai-btn{margin-left:0;display:block;width:max-content}}
+
+.rolebtn{font:inherit;font-size:12.5px;color:#fff;background:none;border:1px solid rgba(255,255,255,.3);border-radius:99px;padding:4px 12px;margin:6px 4px 0 0;cursor:pointer;transition:.25s}
+.rolebtn:hover{border-color:crimson;background:rgba(220,20,60,.25)}
