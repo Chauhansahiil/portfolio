@@ -79,23 +79,22 @@ addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(f
 (function(){var inp=$('#fit-in'),out=$('#fit-out');if(!inp)return;
  var SK=[
   ['SQL',/\bsql\b|mysql|postgres|t-?sql/i,'Strong SQL: CTEs, window functions and subqueries in his Customer Trends project, plus MySQL at Tenet.'],
-  ['Python',/\bpython\b/i,'Python with Pandas and NumPy (about 4 out of 5 for analytics work), used at CodeSoft and in his projects.'],
-  ['Pandas / NumPy',/pandas|numpy/i,'Used for cleaning and analysis at CodeSoft and in Customer Trends.'],
+  ['Python',/\bpython\b|pandas|numpy/i,'Python with Pandas and NumPy (about 4 out of 5 for analytics work), used at CodeSoft and in his projects.'],
   ['Power BI / DAX',/power ?bi|\bdax\b/i,'Built an interactive Power BI dashboard; DAX is in his skill set.'],
   ['Tableau',/tableau/i,'He knows Tableau; Power BI is the tool he has used most.'],
-  ['Excel',/excel|pivot|vlookup|spreadsheet/i,'Pivot tables (beginner to pro at KultureHire), VLOOKUP and data cleaning frameworks.'],
-  ['Data cleaning and EDA',/data clean|cleaning|\beda\b|exploratory|preprocess|data prep|wrangl/i,'Cleaning and EDA in Pandas, and standardisation frameworks at KultureHire.'],
-  ['Dashboards and visualization',/dashboard|visuali[sz]|reporting/i,'Power BI dashboard, Seaborn, and Excel and Power BI reporting.'],
+  ['Data visualization',/data visuali[sz]ation|visuali[sz]ation tools?|dashboards?|business intelligence|\bBI tools?\b/i,'Power BI dashboard, Tableau and Seaborn.'],
+  ['Excel',/\bexcel\b|\bpivot|vlookup|google sheets/i,'Pivot tables (beginner to pro at KultureHire), VLOOKUP and data cleaning frameworks.'],
+  ['Data cleaning and EDA',/data clean|clean(?:ing)?\b.{0,25}\bdata|\bpreprocess|exploratory|\beda\b|data prep|wrangl/i,'Cleaning and EDA in Pandas, and standardisation frameworks at KultureHire.'],
   ['Statistics',/statistic|hypothesis|probability|a\/b test/i,'Statistics and Probability coursework.'],
   ['Machine learning',/machine learning|\bml\b|scikit|sklearn|feature engineering/i,'ML coursework (neural networks, reinforcement learning, NLP, computer vision) and feature engineering.'],
   ['Deep learning',/deep learning|pytorch|tensorflow|neural network/i,'NVIDIA Fundamentals of Deep Learning; PyTorch and TensorFlow in his skills.'],
-  ['GenAI / LLMs',/gen ?ai|generative|\bllms?\b|\brag\b|prompt/i,'GenAI, LLM and RAG are in his skill set.'],
-  ['NLP',/\bnlp\b|natural language/i,'NLP coursework.'],
-  ['R',/\br programming|\br language|\brstudio|\br,/i,'R is listed in his programming skills.'],
+  ['GenAI / LLMs',/gen ?ai|generative ai|\bllms?\b|\brag\b|prompt engineering/i,'GenAI, LLM and RAG are in his skill set.'],
+  ['NLP',/\bnlp\b|natural language processing/i,'NLP coursework.'],
+  ['R',/(?:python|sql|sas|julia|stata)\s*(?:,|\/|and|or|&)\s*R(?![a-z])|\bR\s*(?:,|\/|programming|language|studio)/i,'R is listed in his programming skills.'],
   ['C++',/c\+\+/i,'C++ is listed in his programming skills.'],
-  ['JavaScript / React',/javascript|\breact\b|\bhtml\b|\bcss\b/i,'Front-end work with HTML, CSS, JavaScript and React at Tenet.'],
-  ['Node.js / Express',/node\.?js|express/i,'Back-end work with Node.js and Express at Tenet.'],
-  ['REST APIs',/\brest\b|\bapis?\b/i,'API integration at Tenet; REST API is in his skills.'],
+  ['JavaScript / React',/javascript|\breact(?:\.?js)?\b(?!\s+(?:to|quickly|fast))|\bhtml\b|\bcss\b/i,'Front-end work with HTML, CSS, JavaScript and React at Tenet.'],
+  ['Node.js / Express',/node\.?js|express\.?js/i,'Back-end work with Node.js and Express at Tenet.'],
+  ['REST APIs',/\brest(?:ful)?\b|api (?:development|integration|design)|(?:build|develop|design)\w* apis?/i,'API integration at Tenet; REST API is in his skills.'],
   ['MongoDB',/mongo/i,'MongoDB at Tenet.'],
   ['Snowflake',/snowflake/i,'Snowflake is in his database skills.'],
   ['AWS',/\baws\b|amazon web/i,'AWS is listed in his cloud skills.'],
@@ -103,26 +102,60 @@ addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(f
   ['Git / GitHub',/\bgit\b|github/i,'His projects are public on GitHub.'],
   ['Blockchain / Web3',/blockchain|web3|ethereum|smart contract/i,'Co-authored a published paper, MetaMask and Web3.js, and an Ethereum developer certificate.']];
  var GAP=[
-  ['Looker',/looker/i,'Power BI or Tableau'],['Qlik',/qlik/i,'Power BI or Tableau'],['Spark / PySpark',/spark/i,'Python, Pandas and SQL'],
-  ['Hadoop',/hadoop/i,'SQL and Snowflake'],['Kafka',/kafka/i,'Python and REST APIs'],['Airflow',/airflow/i,'Python and CI/CD'],['dbt',/\bdbt\b/i,'SQL and Snowflake'],
-  ['Azure',/azure/i,'AWS and Snowflake'],['Google Cloud / BigQuery',/\bgcp\b|google cloud|bigquery/i,'AWS and Snowflake'],['Redshift',/redshift/i,'Snowflake and SQL'],
-  ['Databricks',/databricks/i,'Python and Snowflake'],['Docker / Kubernetes',/docker|kubernetes/i,'CI/CD and AWS'],['Java',/\bjava\b/i,'JavaScript and Python'],
-  ['Scala',/scala/i,'Python'],['SAS / SPSS',/\bsas\b|spss/i,'Python and R'],['MATLAB',/matlab/i,'Python and R'],['Alteryx / Informatica / Talend',/alteryx|informatica|talend/i,'Python and SQL'],
-  ['SSIS / SSRS',/ssis|ssrs/i,'SQL']];
+  ['Looker / Looker Studio',/looker/i,'Power BI or Tableau'],['Qlik',/qlik/i,'Power BI or Tableau'],['Google Analytics',/google analytics|\bga4\b/i,'Excel and Power BI'],
+  ['Spark / PySpark',/spark/i,'Python, Pandas and SQL'],['Hadoop / Hive / Presto',/hadoop|\bhive\b|presto/i,'SQL and Snowflake'],['Kafka',/kafka/i,'Python and REST APIs'],
+  ['Airflow',/airflow/i,'Python and CI/CD'],['dbt',/\bdbt\b/i,'SQL and Snowflake'],['Azure',/azure/i,'AWS and Snowflake'],['Google Cloud / BigQuery',/\bgcp\b|google cloud|bigquery/i,'AWS and Snowflake'],
+  ['Redshift',/redshift/i,'Snowflake and SQL'],['Databricks',/databricks/i,'Python and Snowflake'],['Docker / Kubernetes / Terraform',/docker|kubernetes|terraform/i,'CI/CD and AWS'],
+  ['Java / Spring',/\bjava\b|spring boot/i,'JavaScript and Python'],['C# / .NET',/c#|\.net\b|asp\.net/i,'JavaScript and Python'],['Go / Rust / PHP / Ruby',/\bgolang\b|\brust\b|\bphp\b|\bruby\b/i,'Python and JavaScript'],
+  ['Angular / Vue',/angular|\bvue(?:\.?js)?\b/i,'React'],['Django / Flask / FastAPI',/django|flask|fastapi/i,'Python and Node.js'],['Android / iOS / Flutter',/android|\bios\b|flutter|kotlin|swift/i,'React and JavaScript'],
+  ['Scala',/scala/i,'Python'],['SAS / SPSS / Stata',/\bsas\b|spss|stata/i,'Python and R'],['MATLAB',/matlab/i,'Python and R'],
+  ['Alteryx / Informatica / Talend',/alteryx|informatica|talend/i,'Python and SQL'],['SSIS / SSRS',/ssis|ssrs/i,'SQL'],['Oracle / SAP / Salesforce',/oracle|\bsap\b|salesforce/i,'SQL and MySQL'],
+  ['Elasticsearch / Splunk',/elasticsearch|splunk/i,'SQL and MongoDB']];
+ var NUM={one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10};
+ var PREF=/nice to have|preferred|good to have|bonus|desirable|an advantage|a plus\b|plus point|optional/i,HEAD=/^(required|requirements?|qualifications?|must have|responsibilit|what you|key |about you|skills|candidate profile|job description|duties)/i;
  var SAMPLE="Data Analyst\nWe are looking for a Data Analyst with 1+ years of experience. You will build dashboards in Power BI or Tableau, write SQL queries to answer business questions, clean data using Python (Pandas) and Excel, and present insights to stakeholders. Nice to have: Azure, Airflow.";
  function li(n,t){return'<li><b>'+n+'</b><span>'+t+'</span></li>'}
  function show(h){out.innerHTML=h;out.hidden=false;out.scrollIntoView({behavior:calm?'auto':'smooth',block:'nearest'})}
+ function note(m){return'<p class="fit-note">'+m+'</p>'}
+ function years(t){var best=0,re=/(\d{1,2}|one|two|three|four|five|six|seven|eight|nine|ten)\s*\+?\s*(?:-|\u2013|to)?\s*(?:\d{1,2}|one|two|three|four|five|six|seven|eight|nine|ten)?\s*\+?\s*(?:years?|yrs?)\b/gi,m;
+  while((m=re.exec(t))){var a=m[1].toLowerCase(),n=NUM[a]||parseInt(a,10);if(!n||n>25)continue;var ctx=t.slice(Math.max(0,m.index-70),m.index+m[0].length+70);
+   if(/experience|\bexp\b|background|track record|working as|worked/i.test(ctx)&&!/\bago\b|founded|established|in business/i.test(ctx))best=Math.max(best,n)}return best}
  function run(){var t=inp.value.trim();
-  if(t.length<25)return show('<p class="fit-note">Please paste a longer job description so the comparison is meaningful.</p>');
-  var hit=SK.filter(function(s){return s[1].test(t)}),miss=GAP.filter(function(s){return s[1].test(t)});
-  var yrs=0,m,re=/(\d{1,2})\s*\+?\s*(?:-|to)?\s*\d{0,2}\s*\+?\s*(?:years|yrs)/gi;while((m=re.exec(t))){var n=parseInt(m[1],10);if(n>yrs&&n<=20)yrs=n}
-  var total=hit.length+miss.length;
-  if(!total)return show('<p class="fit-note">I could not recognise common data or software skills in that text. Try pasting the requirements section of the job description.</p>');
-  var h='<p class="fit-sum"><b>'+hit.length+' of '+total+'</b> skills found in this description are on Sahil\'s list</p><div class="fit-cols">'+
-   '<div class="fit-col ok"><h4>Where he fits</h4><ul>'+(hit.length?hit.map(function(s){return li(s[0],s[2])}).join(''):'<li><span>No direct matches found.</span></li>')+'</ul></div>'+
-   '<div class="fit-col no"><h4>Not on his list yet</h4><ul>'+(miss.length?miss.map(function(s){return li(s[0],'Not listed. Closest he works with: '+s[2]+'.')}).join(''):'<li><span>No gaps found among the tools I check for.</span></li>')+'</ul></div></div>';
-  if(yrs>=2)h+='<p class="fit-note">This description mentions '+yrs+'+ years of experience. Sahil graduated in 2025 and has three internships, a published paper and end-to-end projects.</p>';
-  h+='<div class="fit-cta"><a class="pillbtn" href="'+resume+'"'+(resume[0]==='#'?'':' target="_blank" rel="noopener"')+'>Download resume</a><a class="pillbtn ghost" href="#contact">Contact Sahil</a><button type="button" class="pillbtn ghost" id="fit-ai">Ask the AI more</button></div><p class="fit-priv">This is a keyword comparison against his portfolio, not a hiring decision.</p>';
+  if(t.split(/\s+/).length<8)return show(note('That is too short to be a job description. Please paste the full text, including the requirements.'));
+  var letters=t.replace(/[^\p{L}]/gu,''),latin=t.replace(/[^A-Za-z]/g,'');
+  if(letters.length&&latin.length/letters.length<.6)return show(note('I can only compare English job descriptions. Please paste the text in English.'));
+  var cls={},lines=t.split(/\n+|[.!?;]\s+/),mode='req';
+  lines.forEach(function(L){var s=L.trim();if(!s)return;var head=s.length<60&&(/:\s*$/.test(s)||((PREF.test(s)||HEAD.test(s))&&s.split(/\s+/).length<=3));
+   if(head&&PREF.test(s))mode='pref';else if(head&&HEAD.test(s))mode='req';
+   var m=(!head&&PREF.test(s))?'pref':mode;
+   SK.concat(GAP).forEach(function(k){if(k[1].test(s)){if(m==='req')cls[k[0]]='req';else if(!cls[k[0]])cls[k[0]]='pref'}})});
+  var hit=SK.filter(function(s){return cls[s[0]]}),miss=GAP.filter(function(s){return cls[s[0]]});
+  if(hit.some(function(s){return s[0]==='Power BI / DAX'||s[0]==='Tableau'}))hit=hit.filter(function(s){return s[0]!=='Data visualization'});
+  if(!hit.length&&!miss.length){var nt=/nurse|doctor|physician|driver|mechanic|electrician|plumber|chef|waiter|teacher|accountant|cashier|warehouse|civil engineer|mechanical engineer|security guard|sales executive|retail/i.test(t);
+   return show(note(nt?'This looks like a role outside data, AI and software, so Sahil\'s profile is not a match for it.':'I could not recognise any tools or skills here that I can compare with Sahil\'s profile. It may not be a technical job description, or it may use terms I do not check. Please read it yourself or ask Sahil directly.'))}
+  var yrs=years(t),senior=/\bsenior\b|\bprincipal\b|\bstaff\b|\bhead of\b|\bdirector\b|\bmanager\b|\blead\b|\barchitect\b/i.test(t.slice(0,160)),
+   fresher=/fresher|entry[- ]level|trainee|junior|campus hire|recent graduate|fresh graduate|new graduate|0\s*(?:-|\u2013|to)\s*[12]\s*years?|no (?:prior )?experience (?:required|needed)/i.test(t),
+   masters=/master'?s|\bm\.?sc\b|\bm\.?tech\b|\bmba\b|post[- ]?graduate|\bph\.?d\b|doctorate/i.test(t);
+  var rh=hit.filter(function(s){return cls[s[0]]==='req'}),rm=miss.filter(function(s){return cls[s[0]]==='req'}),rt=rh.length+rm.length;
+  var bt=hit.length+miss.length,ratio=rt?rh.length/rt:hit.length/bt,sk=ratio>=.7?'ok':(ratio>=.4?'warn':'bad');
+  var ex=(yrs>=4||(senior&&yrs>=3))?'bad':((yrs>=2||senior)?'warn':'ok');
+  var lv=(sk==='bad'||ex==='bad')?'bad':((sk==='warn'||ex==='warn')?'warn':'ok');
+  var title={ok:'Good match',warn:'Partial match',bad:'Not a match yet'}[lv];
+  if(ex==='bad'&&sk!=='bad')title='Too senior for now';else if(ex==='warn'&&sk==='ok')title='A stretch on experience';
+  var parts=[];
+  parts.push(rt?('Required skills: '+rh.length+' of '+rt+' are on Sahil\'s list.'):('Skills mentioned: '+hit.length+' of '+bt+' are on Sahil\'s list.'));
+  if(yrs>=1)parts.push('The description asks for '+yrs+'+ years of experience. Sahil graduated in 2025 and has about one year of internship experience in total, around two months of it as a data analyst intern.');
+  else if(fresher)parts.push('The description looks suitable for freshers or juniors.');
+  else parts.push('No minimum experience is stated.');
+  if(lv==='ok')parts.push('This reads as a reasonable fit for his current level.');
+  if(ex==='bad')parts.push('Applying could still be worth a try if you are flexible on experience, but this is a stretch.');
+  var h='<div class="fit-verdict '+lv+'"><b>'+title+'</b><span>'+parts.join(' ')+'</span></div><div class="fit-cols">'+
+   '<div class="fit-col ok"><h4>Where he fits</h4><ul>'+(hit.length?hit.map(function(s){return li(s[0]+(cls[s[0]]==='pref'?' (nice to have)':''),s[2])}).join(''):'<li><span>No direct matches found.</span></li>')+'</ul></div>'+
+   '<div class="fit-col no"><h4>Not on his list yet</h4><ul>'+(miss.length?miss.map(function(s){return li(s[0]+(cls[s[0]]==='pref'?' (nice to have)':''),'Not listed. Closest he works with: '+s[2]+'.')}).join(''):'<li><span>None of the tools I check for.</span></li>')+'</ul></div></div>';
+  var ns=[];if(senior)ns.push('The title sounds senior, which may involve ownership or leading others.');if(masters)ns.push('It mentions a master\'s degree or PhD. Sahil holds a B.Tech.');
+  ns.push('Not compared: location, salary, notice period, soft skills and domain knowledge. This is a keyword check against his portfolio, not a hiring decision, so please read the full description too.');
+  h+='<ul class="fit-notes">'+ns.map(function(x){return'<li>'+x+'</li>'}).join('')+'</ul>';
+  h+='<div class="fit-cta"><a class="pillbtn" href="'+resume+'"'+(resume[0]==='#'?'':' target="_blank" rel="noopener"')+'>Download resume</a><a class="pillbtn ghost" href="#contact">Contact Sahil</a><button type="button" class="pillbtn ghost" id="fit-ai">Ask the AI more</button></div>';
   show(h);var b=$('#fit-ai');if(b)b.onclick=function(){openAI(true)}}
  $('#fit-run').onclick=run;$('#fit-sample').onclick=function(){inp.value=SAMPLE;cnt();run()};
  function cnt(){$('#fit-count').textContent=inp.value.length+' / 6000'}inp.addEventListener('input',cnt)})();

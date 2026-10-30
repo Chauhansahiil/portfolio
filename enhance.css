@@ -154,18 +154,18 @@ kbd{font:500 .7rem 'Poppins',sans-serif;border:1px solid rgba(255,255,255,.35);b
 
 /* ===== v4: smoother reveals, Education path cards with rings, coursework chips, credential wall ===== */
 .rv{filter:none}
-.edu-list{display:grid;gap:22px;border-top:0}
-.education .edu-row{grid-template-columns:190px 1fr auto;gap:28px;padding:30px 36px;border-radius:28px;position:relative;overflow:hidden;background:#fff;border:1px solid rgba(17,17,17,.08);box-shadow:0 20px 46px -28px rgba(17,17,17,.4);transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .4s,border-color .3s}
-.education .edu-row::before{content:"";position:absolute;left:0;top:22px;bottom:22px;width:5px;border-radius:0 6px 6px 0;background:crimson}
-.education .edu-row:hover{background:#fff;transform:translateY(-6px);border-color:rgba(220,20,60,.45);box-shadow:0 30px 56px -26px rgba(220,20,60,.55)}
-.education .edu-row:hover .edu-year{color:crimson}.education .edu-row:hover h4{color:#111}.education .edu-row:hover p{color:#555}
-.education .edu-row:first-child{background:linear-gradient(135deg,#150811,#2a0b17 55%,#4d1024);border-color:rgba(255,255,255,.08)}
-.education .edu-row:first-child:hover{background:linear-gradient(135deg,#150811,#2a0b17 55%,#4d1024)}
-.education .edu-row:first-child h4,.education .edu-row:first-child:hover h4{color:#fff}
-.education .edu-row:first-child p,.education .edu-row:first-child:hover p{color:rgba(255,255,255,.72)}
-.education .edu-row:first-child .edu-year,.education .edu-row:first-child:hover .edu-year{color:#ff8fa3}
+.education::before{background:none;background-image:radial-gradient(rgba(17,17,17,.12) 1.2px,transparent 1.2px);background-size:24px 24px;-webkit-mask-image:radial-gradient(ellipse at 50% 45%,#000 30%,transparent 80%);mask-image:radial-gradient(ellipse at 50% 45%,#000 30%,transparent 80%)}
+.edu-list{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch;max-width:1000px;margin:0 auto;border-top:0}
+.education .edu-row{display:grid;grid-template-columns:1fr auto;grid-template-areas:"year ring" "info ring";grid-template-rows:auto 1fr;column-gap:18px;row-gap:18px;align-items:start;padding:32px 30px 30px 32px;border-radius:28px;position:relative;overflow:hidden;background:#fff;border:1px solid rgba(17,17,17,.08);box-shadow:0 20px 46px -28px rgba(17,17,17,.4);transition:transform .5s cubic-bezier(.2,.8,.2,1),box-shadow .4s,border-color .3s}
+.education .edu-row::before{content:"";position:absolute;left:0;right:0;top:0;width:auto;height:4px;border-radius:0;background:linear-gradient(90deg,crimson,#ff8fa3)}
+.education .edu-row .edu-year{grid-area:year;display:inline-block;width:max-content;padding:6px 16px;border-radius:999px;background:rgba(220,20,60,.08);font-family:'Poppins',sans-serif;font-size:15px;font-weight:500;color:crimson}
+.education .edu-row .edu-info{grid-area:info}
+.education .edu-row h4{font-size:20px;line-height:1.35;margin-bottom:6px}
+.education .edu-row p{font-size:15px;line-height:1.55;margin:0}
+.education .edu-row:hover{background:#fff;border-radius:28px;transform:translateY(-6px);border-color:rgba(220,20,60,.45);box-shadow:0 30px 56px -26px rgba(220,20,60,.55)}
+.education .edu-row:hover .edu-year{color:crimson;background:rgba(220,20,60,.12)}.education .edu-row:hover h4{color:#111}.education .edu-row:hover p{color:#555}
 .education .edu-row .edu-score{display:none}
-.edu-ring{position:relative;width:104px;height:104px;flex:none}
+.edu-ring{grid-area:ring;align-self:center;position:relative;width:98px;height:98px}
 .edu-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
 .edu-ring circle{fill:none;stroke-width:9;stroke-linecap:round}
 .edu-ring .rt{stroke:rgba(17,17,17,.09)}
@@ -173,10 +173,8 @@ kbd{font:500 .7rem 'Poppins',sans-serif;border:1px solid rgba(255,255,255,.35);b
 .edu-ring.on .rf{stroke-dashoffset:calc(327 * (1 - var(--p)))}
 .edu-ring div{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1}
 .edu-ring b{font:600 22px 'Ubuntu',sans-serif;color:#111}.edu-ring small{font-size:10.5px;color:#666;margin-top:3px}
-.education .edu-row:first-child .edu-ring .rt{stroke:rgba(255,255,255,.14)}
-.education .edu-row:first-child .edu-ring .rf{stroke:#ff6b81}
-.education .edu-row:first-child .edu-ring b{color:#fff}.education .edu-row:first-child .edu-ring small{color:rgba(255,255,255,.65)}
-@media(max-width:690px){.education .edu-row{grid-template-columns:1fr;gap:10px;padding:24px 22px;border-radius:22px}.edu-ring{width:92px;height:92px;margin-top:6px}}
+@media(max-width:800px){.edu-list{grid-template-columns:1fr}}
+@media(max-width:480px){.education .edu-row{padding:28px 22px 24px;border-radius:22px;column-gap:12px}.edu-ring{width:82px;height:82px}.edu-ring b{font-size:18px}}
 
 .course-panel{border-radius:26px;background:linear-gradient(160deg,#fff,#f5f3f8);border:1px solid rgba(17,17,17,.07);box-shadow:0 20px 46px -30px rgba(17,17,17,.4);transition:transform .5s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .4s}
 .course-panel:hover{border-color:rgba(220,20,60,.4);box-shadow:0 28px 54px -28px rgba(220,20,60,.45)}
@@ -198,3 +196,15 @@ kbd{font:500 .7rem 'Poppins',sans-serif;border:1px solid rgba(255,255,255,.35);b
 .cert-card:hover h4{border:0}.cert-card:hover p{color:#fff;border-color:rgba(255,255,255,.4)}
 .cert-card.rv{transform:translateY(54px) scale(.95)}.cert-card.rv.in{transform:none}
 .services .card,.fx{will-change:transform}
+
+/* ===== v5: equal-height coursework panels, honest fit verdict ===== */
+.course-grid{grid-template-columns:repeat(2,1fr);align-items:stretch}
+@media(max-width:800px){.course-grid{grid-template-columns:1fr}}
+.course-panel{height:100%}
+.course-panel ul{align-content:flex-start}
+.course-panel li{padding:7px 14px;font-size:13.5px}
+.fit-verdict{display:flex;flex-direction:column;gap:6px;padding:18px 22px;border-radius:22px;border:1px solid;margin-bottom:18px;font-size:15.5px;line-height:1.6;color:rgba(255,255,255,.85)}
+.fit-verdict b{font-size:21px;color:#fff}
+.fit-verdict.ok{border-color:#4ade80;background:rgba(74,222,128,.08)}.fit-verdict.warn{border-color:#ffb454;background:rgba(255,180,84,.08)}.fit-verdict.bad{border-color:#ff6b81;background:rgba(255,107,129,.1)}
+.fit-notes{max-width:860px;margin:18px auto 0;padding-left:20px;color:rgba(255,255,255,.65);font-size:14px;line-height:1.6}
+.fit-notes li{margin-bottom:6px}
