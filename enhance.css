@@ -208,3 +208,20 @@ kbd{font:500 .7rem 'Poppins',sans-serif;border:1px solid rgba(255,255,255,.35);b
 .fit-verdict.ok{border-color:#4ade80;background:rgba(74,222,128,.08)}.fit-verdict.warn{border-color:#ffb454;background:rgba(255,180,84,.08)}.fit-verdict.bad{border-color:#ff6b81;background:rgba(255,107,129,.1)}
 .fit-notes{max-width:860px;margin:18px auto 0;padding-left:20px;color:rgba(255,255,255,.65);font-size:14px;line-height:1.6}
 .fit-notes li{margin-bottom:6px}
+
+/* ===== v6: chat header always reachable, mobile menu fits, practical-fit list ===== */
+#ai{z-index:100000}
+#ai-fab{z-index:99990}
+body.ai-open .scroll-up-btn{display:none!important}
+.ai-head #ai-x{display:flex;align-items:center;gap:6px;font:500 14px 'Poppins',sans-serif;color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:6px 14px;background:none;cursor:pointer}
+.ai-head #ai-x:hover{border-color:crimson;background:rgba(220,20,60,.2)}
+@media(max-width:500px){#ai{padding-top:env(safe-area-inset-top,0px)}.ai-head{padding:14px 16px}.ai-head #ai-x,.ai-clear{min-height:40px}}
+@media(max-width:947px){.navbar .menu{height:100vh;height:100dvh;overflow-y:auto;padding:70px 0 30px;-webkit-overflow-scrolling:touch}.navbar .menu li a{margin:0;padding:11px 0;font-size:22px}}
+@media(max-width:947px) and (max-height:700px){.navbar .menu li a{padding:7px 0;font-size:20px}}
+.fit-prac{margin-top:16px;padding:22px;border-radius:22px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04)}
+.fit-prac h4{font-size:17px;margin-bottom:10px;color:#fff}
+.fit-prac ul{list-style:none;margin:0;padding:0}
+.fit-prac li{display:flex;gap:12px;padding:10px 0;border-top:1px solid rgba(255,255,255,.08);font-size:14.5px;line-height:1.55;color:rgba(255,255,255,.85)}
+.fit-prac li:first-child{border-top:0}
+.fit-prac li i{flex:none;width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-size:13px;font-weight:700;margin-top:1px}
+.fit-prac li.ok i{background:rgba(74,222,128,.18);color:#4ade80}.fit-prac li.warn i{background:rgba(255,180,84,.2);color:#ffb454}.fit-prac li.info i{background:rgba(255,255,255,.12);color:#ddd}

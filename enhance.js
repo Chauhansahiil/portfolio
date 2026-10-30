@@ -114,12 +114,50 @@ addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(f
  var NUM={one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10};
  var PREF=/nice to have|preferred|good to have|bonus|desirable|an advantage|a plus\b|plus point|optional/i,HEAD=/^(required|requirements?|qualifications?|must have|responsibilit|what you|key |about you|skills|candidate profile|job description|duties)/i;
  var SAMPLE="Data Analyst\nWe are looking for a Data Analyst with 1+ years of experience. You will build dashboards in Power BI or Tableau, write SQL queries to answer business questions, clean data using Python (Pandas) and Excel, and present insights to stakeholders. Nice to have: Azure, Airflow.";
+
  function li(n,t){return'<li><b>'+n+'</b><span>'+t+'</span></li>'}
  function show(h){out.innerHTML=h;out.hidden=false;out.scrollIntoView({behavior:calm?'auto':'smooth',block:'nearest'})}
  function note(m){return'<p class="fit-note">'+m+'</p>'}
+ var INT='His portfolio lists three internships: Data Analyst at KultureHire (Sep \u2013 Oct 2024), Full Stack Developer at Tenet (Dec 2024 \u2013 Jun 2025) and Python Programming at CodeSoft (Aug \u2013 Sep 2023).';
+ var SOFT=[['communication',/communicat/i],['stakeholder management',/stakeholder/i],['documentation',/documentation/i],['business acumen',/business acumen|business understanding/i],['attention to detail',/attention to detail/i],['problem solving',/problem[- ]solving/i],['teamwork',/team ?work|collaborat/i],['ownership',/\bownership\b/i],['leadership',/leadership|lead a team|mentor/i],['time management',/time management/i]];
  function years(t){var best=0,re=/(\d{1,2}|one|two|three|four|five|six|seven|eight|nine|ten)\s*\+?\s*(?:-|\u2013|to)?\s*(?:\d{1,2}|one|two|three|four|five|six|seven|eight|nine|ten)?\s*\+?\s*(?:years?|yrs?)\b/gi,m;
-  while((m=re.exec(t))){var a=m[1].toLowerCase(),n=NUM[a]||parseInt(a,10);if(!n||n>25)continue;var ctx=t.slice(Math.max(0,m.index-70),m.index+m[0].length+70);
+  while((m=re.exec(t))){var a=m[1].toLowerCase(),n=NUM[a]||parseInt(a,10);if(!n||n>25)continue;
+   if(/(?:up to|upto|max(?:imum)?|less than|below|under|within|at most)\s*$/i.test(t.slice(Math.max(0,m.index-22),m.index)))continue;
+   var ctx=t.slice(Math.max(0,m.index-70),m.index+m[0].length+70);
    if(/experience|\bexp\b|background|track record|working as|worked/i.test(ctx)&&!/\bago\b|founded|established|in business/i.test(ctx))best=Math.max(best,n)}return best}
+ function prac(t){var r=[];function add(s,x){r.push([s,x])}
+  var india=/\b(india|nagpur|mumbai|navi mumbai|thane|pune|nashik|bengaluru|bangalore|hyderabad|delhi|noida|gurgaon|gurugram|chennai|kolkata|ahmedabad|jaipur|indore|kochi|chandigarh|coimbatore)\b/i,
+   mh=/\b(maharashtra|mumbai|navi mumbai|thane|pune|nashik|nagpur|aurangabad)\b/i,
+   abroad=/\b(usa|united states|uk|united kingdom|germany|berlin|munich|dubai|uae|singapore|canada|australia|netherlands|europe|london|ireland|sweden|switzerland|france|paris|japan|qatar|saudi)\b/i,
+   hasIn=india.test(t),hasAb=abroad.test(t);
+  if(/degree|bachelor|graduat|b\.?tech|qualification/i.test(t))add('ok','Education: Sahil holds a B.Tech in Artificial Intelligence from G H Raisoni College of Engineering and Management (2021 \u2013 2025).');
+  var bt=null,rb=/(20\d\d)\s*(?:-|\u2013|to|and|\/)\s*(20\d\d)/g,mm;
+  while((mm=rb.exec(t))){var c=t.slice(Math.max(0,mm.index-80),mm.index+mm[0].length+80);if(/batch|passing year|pass(?:ed)? out|graduation year|graduat|passout/i.test(c)){bt=[Math.min(+mm[1],+mm[2]),Math.max(+mm[1],+mm[2])];break}}
+  if(bt)add(bt[0]<=2025&&2025<=bt[1]?'ok':'warn','Graduation year: the role asks for the '+bt[0]+'\u2013'+bt[1]+' batches. Sahil graduated in 2025'+(bt[0]<=2025&&2025<=bt[1]?'.':', which is outside that range.'));
+  else{var sy=t.match(/(20\d\d)\s*(?:graduates?|batch|pass-?outs?)/i);if(sy)add(+sy[1]===2025?'ok':'warn','Graduation year: the role mentions the '+sy[1]+' batch. Sahil graduated in 2025'+(+sy[1]===2025?'.':', which does not match.'))}
+  var cg=t.match(/(\d(?:\.\d+)?)\s*(?:\/\s*10\s*)?\s*cgpa|cgpa\s*(?:of|:|-|\u2013)?\s*(\d(?:\.\d+)?)/i);
+  if(cg){var raw=cg[1]||cg[2],need=parseFloat(raw);if(need>0&&need<=10)add(6.96>=need?'ok':'warn','CGPA: the role asks for '+raw+' CGPA. Sahil\'s CGPA is 6.96 / 10.0'+(6.96>=need?', which meets it.':', which is below it.'))}
+  var pc=t.match(/(?:minimum|min\.?|at least|aggregate|marks|percentage)[^.\n]{0,40}?(\d{2}(?:\.\d+)?)\s*%/i);
+  if(pc)add('info','Marks: the role mentions at least '+pc[1]+'%. Sahil\'s portfolio shows a CGPA of 6.96 / 10.0, and the percentage depends on his university\'s conversion, so please ask him for the exact figure.');
+  if(/\bnagpur\b/i.test(t))add('ok','Location: the role is in Nagpur, where Sahil is based.');
+  else if(hasIn&&!hasAb)add('ok','Location: in India. Sahil is open to relocating to any city'+(mh.test(t)?', and he can join immediately for roles within Maharashtra':'')+'. He needs no visa for roles in India.');
+  else if(hasAb&&!hasIn)add('warn','Location: this role appears to be outside India. Sahil would need visa sponsorship for it.');
+  var wm=[];if(/work from office|\bwfo\b|on-?site|in-?office/i.test(t))wm.push('on-site');if(/hybrid/i.test(t))wm.push('hybrid');if(/remote|work from home|\bwfh\b/i.test(t))wm.push('remote');
+  if(wm.length)add('ok','Work mode: '+wm.join(' / ')+'. Sahil is fine with remote, hybrid or on-site work.');
+  var jn=t.match(/immediate(?:ly)?\s*(?:to|-|\u2013)\s*(\d{1,3})\s*days/i),up=t.match(/(?:notice period|joining|join)[^.\n]{0,40}?(?:up to|upto|max(?:imum)?|within|not more than)\s*(\d{1,3})\s*days/i);
+  if(jn)add(parseInt(jn[1],10)>=15?'ok':'warn','Joining: the role allows immediate to '+jn[1]+' days. Sahil\'s notice period is 15 days, and he can join immediately within Maharashtra.');
+  else if(up)add(parseInt(up[1],10)>=15?'ok':'warn','Joining: the role allows up to '+up[1]+' days. Sahil\'s notice period is 15 days, and he can join immediately within Maharashtra.');
+  else if(/immediate joiners?|immediate joining/i.test(t))add('warn','Joining: the role prefers immediate joiners. Sahil can join immediately only for roles within Maharashtra; otherwise his notice period is 15 days.');
+  if(!/[$\u20ac\u00a3]|\busd\b|\beur\b|\bgbp\b|\baed\b/i.test(t)){var sm=t.match(/(\d+(?:\.\d+)?)\s*(?:lpa|lakhs?|lacs?)?\s*(?:-|\u2013|to)\s*(\d+(?:\.\d+)?)\s*(?:lpa|lakhs?|lacs?)/i),sx=t.match(/(?:up to|upto|max(?:imum)?)\s*(?:rs\.?|inr|\u20b9)?\s*(\d+(?:\.\d+)?)\s*(?:lpa|lakhs?|lacs?)/i),lo=0,hi=0;
+   if(sm){lo=parseFloat(sm[1]);hi=parseFloat(sm[2])}else if(sx)hi=parseFloat(sx[1]);
+   if(hi){var s4=4.5;add(s4>hi?'warn':'ok','Salary: '+(lo?lo+' to '+hi:'up to '+hi)+' LPA is stated. Sahil\'s expectation is around 4.5 LPA, which is '+(s4>hi?'above the top of that range':(s4<lo?'below that range':'within it'))+', and he is open to discussion based on the role and growth.')}}
+  var lg=t.match(/\b(german|french|spanish|japanese|mandarin|arabic|dutch)\b/i);
+  if(lg&&/fluen|proficien|required|mandatory|must|native/i.test(t))add('warn','Language: the role mentions '+lg[1]+'. Sahil speaks English, Hindi and Marathi, with basic German only.');
+  var ce=t.match(/pl-?300|az-?900|dp-?900|dp-?203|aws certified[^.\n]{0,25}|tableau (?:desktop )?(?:specialist|certified|certification)|google data analytics|\bpmp\b|\bcfa\b|six sigma|scrum master|cissp|\bccna\b/i);
+  if(ce)add('warn','Certification: the description mentions '+ce[0].trim()+', which is not on his list (Accenture, IBM, NVIDIA and Indian Blockchain Institute).');
+  var un=[];if(/\bshifts?\b/i.test(t))un.push('shift timings');if(/service bond|bond period|\bbond\b/i.test(t))un.push('a service bond');if(/\btravel/i.test(t))un.push('travel');if(/case study|assignment|coding test|take-?home/i.test(t))un.push('a test or assignment');
+  if(un.length)add('info','The description mentions '+un.join(', ')+'. His portfolio does not cover this, so please ask him directly.');
+  return r}
  function run(){var t=inp.value.trim();
   if(t.split(/\s+/).length<8)return show(note('That is too short to be a job description. Please paste the full text, including the requirements.'));
   var letters=t.replace(/[^\p{L}]/gu,''),latin=t.replace(/[^A-Za-z]/g,'');
@@ -134,26 +172,31 @@ addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(f
   if(!hit.length&&!miss.length){var nt=/nurse|doctor|physician|driver|mechanic|electrician|plumber|chef|waiter|teacher|accountant|cashier|warehouse|civil engineer|mechanical engineer|security guard|sales executive|retail/i.test(t);
    return show(note(nt?'This looks like a role outside data, AI and software, so Sahil\'s profile is not a match for it.':'I could not recognise any tools or skills here that I can compare with Sahil\'s profile. It may not be a technical job description, or it may use terms I do not check. Please read it yourself or ask Sahil directly.'))}
   var yrs=years(t),senior=/\bsenior\b|\bprincipal\b|\bstaff\b|\bhead of\b|\bdirector\b|\bmanager\b|\blead\b|\barchitect\b/i.test(t.slice(0,160)),
-   fresher=/fresher|entry[- ]level|trainee|junior|campus hire|recent graduate|fresh graduate|new graduate|0\s*(?:-|\u2013|to)\s*[12]\s*years?|no (?:prior )?experience (?:required|needed)/i.test(t),
-   masters=/master'?s|\bm\.?sc\b|\bm\.?tech\b|\bmba\b|post[- ]?graduate|\bph\.?d\b|doctorate/i.test(t);
+   fresher=/fresher|entry[- ]level|trainee|junior|campus hire|recent graduate|fresh graduate|new graduate|0\s*(?:-|\u2013|to)\s*[12]\s*years?|no (?:prior )?experience (?:required|needed)|up to \d+ years? of/i.test(t),
+   masters=/(?:master'?s|\bm\.?sc\b|\bm\.?tech\b|post[- ]?graduate|\bph\.?d\b|doctorate)[^.\n]{0,40}(?:required|mandatory|preferred|degree)|(?:required|mandatory|preferred)[^.\n]{0,40}(?:master'?s|\bm\.?sc\b|\bm\.?tech\b|post[- ]?graduate|\bph\.?d\b|doctorate)/i.test(t);
   var rh=hit.filter(function(s){return cls[s[0]]==='req'}),rm=miss.filter(function(s){return cls[s[0]]==='req'}),rt=rh.length+rm.length;
   var bt=hit.length+miss.length,ratio=rt?rh.length/rt:hit.length/bt,sk=ratio>=.7?'ok':(ratio>=.4?'warn':'bad');
-  var ex=(yrs>=4||(senior&&yrs>=3))?'bad':((yrs>=2||senior)?'warn':'ok');
-  var lv=(sk==='bad'||ex==='bad')?'bad':((sk==='warn'||ex==='warn')?'warn':'ok');
+  var ex=(yrs>=4||(senior&&yrs>=3))?'bad':((yrs>=2||senior)?'warn':'ok'),edge=(yrs===1&&!fresher&&ex==='ok');
+  var lv=(sk==='bad'||ex==='bad')?'bad':((sk==='warn'||ex==='warn'||edge)?'warn':'ok');
   var title={ok:'Good match',warn:'Partial match',bad:'Not a match yet'}[lv];
-  if(ex==='bad'&&sk!=='bad')title='Too senior for now';else if(ex==='warn'&&sk==='ok')title='A stretch on experience';
-  var parts=[];
+  if(ex==='bad'&&sk!=='bad')title='Too senior for now';else if(ex==='warn'&&sk==='ok')title='A stretch on experience';else if(edge&&sk==='ok')title='Good skills match, experience at the edge';
+  var pr=prac(t),parts=[];
   parts.push(rt?('Required skills: '+rh.length+' of '+rt+' are on Sahil\'s list.'):('Skills mentioned: '+hit.length+' of '+bt+' are on Sahil\'s list.'));
-  if(yrs>=1)parts.push('The description asks for '+yrs+'+ years of experience. Sahil graduated in 2025 and has about one year of internship experience in total, around two months of it as a data analyst intern.');
-  else if(fresher)parts.push('The description looks suitable for freshers or juniors.');
-  else parts.push('No minimum experience is stated.');
+  if(yrs>=1)parts.push('The description asks for '+yrs+'+ years of experience. Sahil graduated in 2025. '+INT+' His data analyst experience is the KultureHire internship, and his portfolio does not show a full year in an analyst role.');
+  else if(fresher)parts.push('The description looks suitable for freshers and juniors. Sahil graduated in 2025. '+INT);
+  else parts.push('No minimum experience is stated. Sahil graduated in 2025. '+INT);
   if(lv==='ok')parts.push('This reads as a reasonable fit for his current level.');
   if(ex==='bad')parts.push('Applying could still be worth a try if you are flexible on experience, but this is a stretch.');
+  if(pr.some(function(p){return p[0]==='warn'}))parts.push('Some practical points below need a check.');
   var h='<div class="fit-verdict '+lv+'"><b>'+title+'</b><span>'+parts.join(' ')+'</span></div><div class="fit-cols">'+
    '<div class="fit-col ok"><h4>Where he fits</h4><ul>'+(hit.length?hit.map(function(s){return li(s[0]+(cls[s[0]]==='pref'?' (nice to have)':''),s[2])}).join(''):'<li><span>No direct matches found.</span></li>')+'</ul></div>'+
    '<div class="fit-col no"><h4>Not on his list yet</h4><ul>'+(miss.length?miss.map(function(s){return li(s[0]+(cls[s[0]]==='pref'?' (nice to have)':''),'Not listed. Closest he works with: '+s[2]+'.')}).join(''):'<li><span>None of the tools I check for.</span></li>')+'</ul></div></div>';
-  var ns=[];if(senior)ns.push('The title sounds senior, which may involve ownership or leading others.');if(masters)ns.push('It mentions a master\'s degree or PhD. Sahil holds a B.Tech.');
-  ns.push('Not compared: location, salary, notice period, soft skills and domain knowledge. This is a keyword check against his portfolio, not a hiring decision, so please read the full description too.');
+  if(pr.length)h+='<div class="fit-prac"><h4>Practical fit</h4><ul>'+pr.map(function(p){return'<li class="'+p[0]+'"><i>'+({ok:'\u2713',warn:'!',info:'i'}[p[0]])+'</i><span>'+p[1]+'</span></li>'}).join('')+'</ul></div>';
+  var ns=[],sf=SOFT.filter(function(s){return s[1].test(t)}).map(function(s){return s[0]});
+  if(/advanced excel/i.test(t))ns.push('It asks for Advanced Excel. He lists pivot tables and VLOOKUP, and whether that counts as advanced is something he can show in an interview.');
+  if(sf.length)ns.push('Soft skills mentioned ('+sf.join(', ')+') are not scored, because a portfolio cannot prove them.');
+  if(senior)ns.push('The title sounds senior, which may involve ownership or leading others.');if(masters)ns.push('It mentions a master\'s degree or PhD as required or preferred. Sahil holds a B.Tech.');
+  ns.push('Not compared: domain knowledge and anything the checker does not recognise. This is a keyword check against his portfolio, not a hiring decision, so please read the full description too.');
   h+='<ul class="fit-notes">'+ns.map(function(x){return'<li>'+x+'</li>'}).join('')+'</ul>';
   h+='<div class="fit-cta"><a class="pillbtn" href="'+resume+'"'+(resume[0]==='#'?'':' target="_blank" rel="noopener"')+'>Download resume</a><a class="pillbtn ghost" href="#contact">Contact Sahil</a><button type="button" class="pillbtn ghost" id="fit-ai">Ask the AI more</button></div>';
   show(h);var b=$('#fit-ai');if(b)b.onclick=function(){openAI(true)}}
@@ -175,7 +218,7 @@ var KB=[
  {k:'customer trends findings find insights results found discover discovered conclusion learn',a:"In Customer Trends Analysis, Sahil used SQL to answer ten business questions on retail shopping data: who spends more by gender, age group and subscription, whether discounts and shipping type change spending, which products rate highest or are discounted most, and how customers split into New, Returning and Loyal groups. The actual figures are in the dashboard and report in the repo, and he is happy to walk you through them. "+A(REPO,'See the repo')+"."},
  {k:'dataset data size rows records csv source large',a:"The project uses a retail customer shopping dataset in CSV format, with details such as gender, age group, item and category, purchase amount, discount used, review rating, shipping type, subscription status and previous purchases. The exact row count is in the repo, and Sahil can tell you more on a call. "+A(REPO,'See the repo')+"."},
  {k:'hardest difficult challenge challenging toughest struggle problem faced',a:"Sahil found the analysis step the most demanding: turning broad business questions into precise SQL, such as grouping customers into New, Returning and Loyal segments and ranking the top products in each category with CTEs and a window function, while keeping the work consistent from Python to SQL to the Power BI dashboard."},
- {k:'customer trends analysis retail dashboard project',a:"Customer Trends Analysis is based on an open-source project by Amlan Mohanty, which Sahil worked through end to end: cleaning retail data with Python (Pandas), answering business questions in SQL, and building an interactive Power BI dashboard, with his own notebook, queries and report. "+A(REPO,'See the repo')+"."},
+ {k:'customer trends analysis retail dashboard',a:"Customer Trends Analysis is based on an open-source project by Amlan Mohanty, which Sahil worked through end to end: cleaning retail data with Python (Pandas), answering business questions in SQL, and building an interactive Power BI dashboard, with his own notebook, queries and report. "+A(REPO,'See the repo')+"."},
  {k:'blockchain banking metamask web3 ethereum crypto paper research published journal ijirt publication author coauthor',a:"Sahil co-authored a research paper, Secure Banking System Using Block-chain Technology, published in IJIRT (Volume 11, Issue 7, December 2024) with three classmates and Dr. Smita Nirkhi, head of the AI department. The system uses MetaMask and Web3.js with smart contracts built in Remix, SHA-256 hashing and token-based authentication, with separate user and admin modules. He worked on it as part of the team. "+A(PAPER,'Read the paper')+" or "+A(GH+'/Secure-Banking-System-Using-Blockchain-Technology-','see the repo')+"."},
  {k:'live screenshot screenshots demo link dashboard',a:"There is no public live dashboard link, but the Power BI file and the project report are in the GitHub repo. "+A(REPO,'Open the repo')+". For a walkthrough or screenshots, please "+A('#contact','contact Sahil')+" directly."},
  {k:'sql joins cte ctes window functions subquery query queries',a:"Sahil's SQL is strong and practical: he is comfortable with joins, aggregations, subqueries, CTEs and window functions. In the Customer Trends project he used CTEs, ROW_NUMBER for ranking top products, CASE logic for customer segments and subqueries for comparisons."},
@@ -217,15 +260,18 @@ function future(q){var s=q.toLowerCase();if(!/see (him|himself|yourself)|3 to 5|
 var CH=['Why hire Sahil?','Best project','Availability','Get his resume','Match a job description','How can I contact him?'];
 var NOPE={looker:'Power BI for dashboards',qlik:'Power BI for dashboards',azure:'AWS and Snowflake',gcp:'AWS and Snowflake',bigquery:'Snowflake and SQL',redshift:'Snowflake and SQL',spark:'Python, Pandas and SQL',pyspark:'Python, Pandas and SQL',hadoop:'SQL and Snowflake',kafka:'Python and REST APIs',airflow:'Python and CI/CD',dbt:'SQL and Snowflake',docker:'CI/CD and AWS',kubernetes:'CI/CD and AWS',scala:'Python and R',matlab:'Python and R',sas:'Python and R',spss:'Python and R'};
 function toolCheck(q){var w=q.toLowerCase().replace(/[^a-z0-9 ]/g,' ').split(/\s+/);for(var i=0;i<w.length;i++)if(NOPE[w[i]])return w[i].charAt(0).toUpperCase()+w[i].slice(1)+' is not on Sahil\'s skills list yet. The closest he works with is '+NOPE[w[i]]+'. '+A('#Skills','See his skills')+'.';return''}
+var GAPANS="Sahil has not listed big-data and cloud tools such as Spark, Kafka, Airflow, Azure or Google Cloud, and he is still building experience with very large real-world datasets.";
+function gapsQ(q){var s=q.toLowerCase();return/(\bnot|n't|\bdoesnt|\bdont|\bnever)\s+(know|use|familiar|skilled)|skill gaps?|tool gaps?|knowledge gaps?|missing skills?|what.{0,20}\blacks?\b/.test(s)}
 var box=$('#ai'),msgs=$('#msgs'),inp=$('#ai-in');
 function add(h,me){var d=document.createElement('div');d.className='m '+(me?'me':'bot');if(me)d.textContent=h;else d.innerHTML=h;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;return d}
 function match(q){var w=q.toLowerCase().replace(/[^a-z0-9. ]/g,' ').split(/\s+/).filter(Boolean),best=null,top=0;
-  KB.forEach(function(e){var s=0,ks=e.k.split(' ');w.forEach(function(t){if(t.length>1&&ks.some(function(k){return k===t||(t.length>3&&(k.indexOf(t)===0||t.indexOf(k)===0))}))s++});if(s>top){top=s;best=e}});return best}
+  KB.forEach(function(e){var s=0,ks=e.k.split(' ');w.forEach(function(t){if(t.length>1&&ks.some(function(k){return k===t||(t.length>3&&k.length>5&&(k.indexOf(t)===0||t.indexOf(k)===0))}))s++});if(s>top){top=s;best=e}});return best}
 var hist=[],AI=C.AI_ENDPOINT||(C.WORKER_URL?C.WORKER_URL+'/chat':'');
 function fmt(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/(https?:\/\/[^\s)]+[^\s).,;:])/g,'<a href="$1" target="_blank" rel="noopener">$1</a>').replace(/\n/g,'<br>')}
 function ask(q){q=q.trim();if(!q)return;add(q,true);var t=add('<span class="dots"><i></i><i></i><i></i></span>');
   function say(h){setTimeout(function(){t.innerHTML=h;msgs.scrollTop=msgs.scrollHeight},calm?0:300)}
   var hit=match(q),fb='I only know what is on this portfolio. Try asking about his projects, skills, experience, education or resume, or '+A('#contact','message Sahil directly')+'.';
+  if(gapsQ(q))return say(GAPANS);
   if(hit&&hit.det)return say(hit.a);
   var tc=toolCheck(q);if(tc)return say(tc);
   var fu=future(q);if(fu)return say(fu);
@@ -235,11 +281,11 @@ function ask(q){q=q.trim();if(!q)return;add(q,true);var t=add('<span class="dots
    .then(function(j){if(!j.answer)throw 0;hist.push({role:'user',content:q},{role:'assistant',content:j.answer});say(fmt(j.answer))})
    .catch(function(){say(hit?hit.a:fb)})}
 function greet(){msgs.innerHTML='';hist=[];add('Hi, I\'m Sahil\'s AI assistant. Ask me anything about his projects, skills, experience or education, or ask for his resume.')}
-function openAI(v){box.hidden=!v;$('#ai-fab').style.display=v?'none':'';if(v){inp.focus();if(!msgs.children.length)greet()}else $('#ai-fab').focus()}
+function openAI(v){box.hidden=!v;document.body.classList.toggle('ai-open',v);$('#ai-fab').style.display=v?'none':'';if(v){inp.focus();if(!msgs.children.length)greet()}else $('#ai-fab').focus()}
 (function(){msgs.setAttribute('aria-live','polite');
   CH.forEach(function(c){var b=document.createElement('button');b.type='button';b.textContent=c;b.onclick=function(){ask(c)};$('#chips').appendChild(b)});
   var n=document.createElement('p');n.className='ai-note';n.textContent='AI answers are based on Sahil\'s portfolio and may be imperfect.';box.insertBefore(n,$('#ai-form'));
-  var c=document.createElement('button');c.type='button';c.className='ai-clear';c.textContent='Clear';c.onclick=greet;$('.ai-head').insertBefore(c,$('#ai-x'))})();
+  $('#ai-x').innerHTML='&times; Close';var c=document.createElement('button');c.type='button';c.className='ai-clear';c.textContent='Clear';c.onclick=greet;$('.ai-head').insertBefore(c,$('#ai-x'))})();
 $$('[data-open-ai]').forEach(function(b){b.addEventListener('click',function(ev){ev.preventDefault();openAI(true)})});
 $('#ai-x').onclick=function(){openAI(false)};
 $('#ai-form').addEventListener('submit',function(e){e.preventDefault();ask(inp.value);inp.value=''});

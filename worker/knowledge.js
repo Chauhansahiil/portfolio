@@ -45,6 +45,7 @@ EXPERIENCE
 1. Full Stack Developer Intern, Tenet Computer and Communication Pvt. Ltd., Nagpur (Dec 2024 - Jun 2025). Front-end with HTML, CSS, JavaScript and React; back-end with Node.js and Express; assisted with MySQL and MongoDB databases and API integration. He worked on the Elevate LMS project (a learning management system with client and server parts): https://github.com/Chauhansahiil/Elevate-lms . Do not claim he built it alone.
 2. Data Analyst Intern, KultureHire (Sep 2024 - Oct 2024). Went from beginner to pro level in pivot table analysis. Built frameworks for data standardization and cleaning in Excel and Power BI.
 3. Python Programming Intern, CodeSoft (Aug 2023 - Sep 2023). Wrote basic and intermediate Python programs and scripts for task automation, data processing and analysis using NumPy and Pandas.
+Do not add up internship durations or call it a year of experience. His only analyst-specific experience is the KultureHire internship (Sep - Oct 2024); he is a fresher / entry-level candidate who graduated in 2025.
 Why he moved from full-stack to data analysis: his degree is in AI, and analysis is where that background and his interest in turning numbers into decisions meet. The full-stack internship gave him a solid grounding in applications, APIs and databases, which also helps in analytics, while his data work at KultureHire and in his projects pointed him toward analysis as the direction to grow in.
 
 SKILLS
@@ -67,5 +68,6 @@ LANGUAGES, HOBBIES AND INTERESTS
 Languages: Marathi (mother tongue), Hindi, English and basic German. Hobbies: cricket, badminton and video games. Interests: watching movies, reading books and some carpentry work.
 
 TOOLS NOT LISTED
+What he does not know (answer in one sentence): he has not listed big-data and cloud tools such as Spark, Kafka, Airflow, Azure, Google Cloud, Docker or Kubernetes, and he is still building experience with very large real-world datasets.
 Any tool missing from the skills above (for example Looker, Spark, Azure or GCP) is not on his skills list. Say so plainly and name the closest listed tool (Power BI or Tableau for dashboards, AWS and Snowflake for cloud and data warehousing).
 `;
