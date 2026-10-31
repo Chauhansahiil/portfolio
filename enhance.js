@@ -72,7 +72,9 @@ function frame(){tick=false;
   if(!calm){orbs.forEach(function(r){var b=r.s.getBoundingClientRect();if(b.bottom<-200||b.top>innerHeight+200)return;r.o.style.transform='translate3d(0,'+((b.top+b.height/2-innerHeight/2)*r.v)+'px,0)'});
     var hc=$('.home-content');if(hc&&scrollY<innerHeight){hc.style.transform='translateY('+scrollY*.35+'px)';hc.style.opacity=Math.max(0,1-scrollY/(innerHeight*.7))}}
   if(exp){var r=exp.getBoundingClientRect(),p=Math.min(1,Math.max(0,(innerHeight*.6-r.top)/r.height));exp.style.setProperty('--p',p);
-    $$('.experience-item',exp).forEach(function(it){it.classList.toggle('lit',it.getBoundingClientRect().top<innerHeight*.62)})}}
+    var its=$$('.experience-item',exp),mid=innerHeight*.5,best=null,bd=1e9,inView=r.bottom>innerHeight*.15&&r.top<innerHeight*.85;
+    its.forEach(function(it){var q=it.getBoundingClientRect(),d=Math.abs(q.top+q.height/2-mid);it.classList.toggle('lit',q.top<innerHeight*.62);if(d<bd){bd=d;best=it}});
+    its.forEach(function(it){it.classList.toggle('active',inView&&bd<innerHeight*.6&&it===best)})}}
 addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(frame)}},{passive:true});addEventListener('resize',frame);frame();
 
 /* ---------- job fit checker (runs only in the browser, nothing is sent) ---------- */
@@ -200,6 +202,7 @@ addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(f
   h+='<ul class="fit-notes">'+ns.map(function(x){return'<li>'+x+'</li>'}).join('')+'</ul>';
   h+='<div class="fit-cta"><a class="pillbtn" href="'+resume+'"'+(resume[0]==='#'?'':' target="_blank" rel="noopener"')+'>Download resume</a><a class="pillbtn ghost" href="#contact">Contact Sahil</a><button type="button" class="pillbtn ghost" id="fit-ai">Ask the AI more</button></div>';
   show(h);var b=$('#fit-ai');if(b)b.onclick=function(){openAI(true)}}
+ out.addEventListener('pointermove',function(ev){var el=ev.target.closest?ev.target.closest('.fit-col,.fit-prac'):null;if(!el)return;var q=el.getBoundingClientRect();el.style.setProperty('--mx',(ev.clientX-q.left)+'px');el.style.setProperty('--my',(ev.clientY-q.top)+'px')});
  $('#fit-run').onclick=run;$('#fit-sample').onclick=function(){inp.value=SAMPLE;cnt();run()};
  function cnt(){$('#fit-count').textContent=inp.value.length+' / 6000'}inp.addEventListener('input',cnt)})();
 
