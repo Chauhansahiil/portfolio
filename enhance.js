@@ -85,7 +85,7 @@ addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(f
   ['Power BI / DAX',/power ?bi|\bdax\b/i,'Built an interactive Power BI dashboard; DAX is in his skill set.'],
   ['Tableau',/tableau/i,'He knows Tableau; Power BI is the tool he has used most.'],
   ['Data visualization',/data visuali[sz]ation|visuali[sz]ation tools?|dashboards?|business intelligence|\bBI tools?\b/i,'Power BI dashboard, Tableau and Seaborn.'],
-  ['Excel',/\bexcel\b|\bpivot|vlookup|google sheets/i,'Pivot tables (beginner to pro at KultureHire), VLOOKUP and data cleaning frameworks.'],
+  ['Excel',/\bexcel\b|\bpivot|vlookup|google sheets|ms excel/i,'Pivot tables (beginner to pro at KultureHire), VLOOKUP and data cleaning frameworks.'],
   ['Data cleaning and EDA',/data clean|clean(?:ing)?\b.{0,25}\bdata|\bpreprocess|exploratory|\beda\b|data prep|wrangl/i,'Cleaning and EDA in Pandas, and standardisation frameworks at KultureHire.'],
   ['Statistics',/statistic|hypothesis|probability|a\/b test/i,'Statistics and Probability coursework.'],
   ['Machine learning',/machine learning|\bml\b|scikit|sklearn|feature engineering/i,'ML coursework (neural networks, reinforcement learning, NLP, computer vision) and feature engineering.'],
@@ -96,7 +96,7 @@ addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(f
   ['C++',/c\+\+/i,'C++ is listed in his programming skills.'],
   ['JavaScript / React',/javascript|\breact(?:\.?js)?\b(?!\s+(?:to|quickly|fast))|\bhtml\b|\bcss\b/i,'Front-end work with HTML, CSS, JavaScript and React at Tenet.'],
   ['Node.js / Express',/node\.?js|express\.?js/i,'Back-end work with Node.js and Express at Tenet.'],
-  ['REST APIs',/\brest(?:ful)?\b|api (?:development|integration|design)|(?:build|develop|design)\w* apis?/i,'API integration at Tenet; REST API is in his skills.'],
+  ['REST APIs',/\brestful\b|\brest (?:api|apis|services?)\b|api (?:development|integration|design)|(?:build|develop|design)\w* apis?/i,'API integration at Tenet; REST API is in his skills.'],
   ['MongoDB',/mongo/i,'MongoDB at Tenet.'],
   ['Snowflake',/snowflake/i,'Snowflake is in his database skills.'],
   ['AWS',/\baws\b|amazon web/i,'AWS is listed in his cloud skills.'],
@@ -105,34 +105,74 @@ addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(f
   ['Blockchain / Web3',/blockchain|web3|ethereum|smart contract/i,'Co-authored a published paper, MetaMask and Web3.js, and an Ethereum developer certificate.']];
  var GAP=[
   ['Looker / Looker Studio',/looker/i,'Power BI or Tableau'],['Qlik',/qlik/i,'Power BI or Tableau'],['Google Analytics',/google analytics|\bga4\b/i,'Excel and Power BI'],
-  ['Spark / PySpark',/spark/i,'Python, Pandas and SQL'],['Hadoop / Hive / Presto',/hadoop|\bhive\b|presto/i,'SQL and Snowflake'],['Kafka',/kafka/i,'Python and REST APIs'],
+  ['Spark / PySpark',/\bspark\b|pyspark/i,'Python, Pandas and SQL'],['Hadoop / Hive / Presto',/hadoop|\bhive\b|presto/i,'SQL and Snowflake'],['Kafka',/kafka/i,'Python and REST APIs'],
   ['Airflow',/airflow/i,'Python and CI/CD'],['dbt',/\bdbt\b/i,'SQL and Snowflake'],['Azure',/azure/i,'AWS and Snowflake'],['Google Cloud / BigQuery',/\bgcp\b|google cloud|bigquery/i,'AWS and Snowflake'],
   ['Redshift',/redshift/i,'Snowflake and SQL'],['Databricks',/databricks/i,'Python and Snowflake'],['Docker / Kubernetes / Terraform',/docker|kubernetes|terraform/i,'CI/CD and AWS'],
   ['Java / Spring',/\bjava\b|spring boot/i,'JavaScript and Python'],['C# / .NET',/c#|\.net\b|asp\.net/i,'JavaScript and Python'],['Go / Rust / PHP / Ruby',/\bgolang\b|\brust\b|\bphp\b|\bruby\b/i,'Python and JavaScript'],
-  ['Angular / Vue',/angular|\bvue(?:\.?js)?\b/i,'React'],['Django / Flask / FastAPI',/django|flask|fastapi/i,'Python and Node.js'],['Android / iOS / Flutter',/android|\bios\b|flutter|kotlin|swift/i,'React and JavaScript'],
-  ['Scala',/scala/i,'Python'],['SAS / SPSS / Stata',/\bsas\b|spss|stata/i,'Python and R'],['MATLAB',/matlab/i,'Python and R'],
-  ['Alteryx / Informatica / Talend',/alteryx|informatica|talend/i,'Python and SQL'],['SSIS / SSRS',/ssis|ssrs/i,'SQL'],['Oracle / SAP / Salesforce',/oracle|\bsap\b|salesforce/i,'SQL and MySQL'],
-  ['Elasticsearch / Splunk',/elasticsearch|splunk/i,'SQL and MongoDB']];
+  ['Angular / Vue',/angular|\bvue(?:\.?js)?\b/i,'React'],['Django / Flask / FastAPI',/django|flask|fastapi/i,'Python and Node.js'],['Android / iOS / Flutter',/\bandroid\b|\bios\b|\bflutter\b|\bkotlin\b|\bswift\b/i,'React and JavaScript'],
+  ['Scala',/\bscala\b/i,'Python'],['SAS / SPSS / Stata',/\bsas\b|spss|stata/i,'Python and R'],['MATLAB',/matlab/i,'Python and R'],
+  ['Alteryx / Informatica / Talend',/alteryx|informatica|talend/i,'Python and SQL'],['SSIS / SSRS',/\bssis\b|\bssrs\b/i,'SQL'],['Oracle / SAP / Salesforce',/oracle|\bsap\b|salesforce/i,'SQL and MySQL'],
+  ['Elasticsearch / Splunk',/elasticsearch|splunk/i,'SQL and MongoDB'],
+  ['Requirements gathering / BRD / user stories',/requirements? (?:gathering|analysis|elicitation)|elicit|\bbrds?\b|\bfrd\b|functional specifications?|user stories|requirement documents?|gather(?:ing)?[^.\n]{0,25}requirements/i,'Excel and Power BI reporting (no formal business analyst role listed)'],
+  ['Business process analysis / modelling',/process (?:analysis|mapping|flows?|modell?ing|improvement)|business process|\bbpmn\b|\buml\b|use cases?/i,'data analysis and EDA'],
+  ['UAT / verification and validation',/\buat\b|user acceptance|traceability/i,''],
+  ['Agile / Scrum / Jira',/\bagile\b|\bscrum\b|\bjira\b|\bconfluence\b/i,''],
+  ['ERP systems',/\berp\b/i,'SQL and Snowflake'],
+  ['Planning and forecasting software',/planning software|demand forecasting|inventory optimi[sz]ation|\bs&op\b|kinaxis|anaplan/i,'Excel and Python analysis']];
+ var DOM=[
+  ['BIM / Revit / CAD',[/revit/i,/\bbim\b/i,/dynamo/i,/autocad/i,/autodesk/i,/point clouds?/i]],
+  ['manufacturing and supply chain operations',[/supply chain/i,/demand forecasting/i,/inventory/i,/procurement/i,/logistics/i,/planning software/i,/manufacturing/i,/plant operations?/i,/warehouse/i,/shop ?floor/i]],
+  ['accounting and finance operations',[/\btally\b/i,/\bgst\b/i,/accounts payable|accounts receivable/i,/general ledger/i,/bookkeeping/i]],
+  ['embedded and mechanical engineering',[/embedded/i,/firmware/i,/\bplc\b/i,/scada/i,/solidworks/i,/\bcnc\b/i]],
+  ['sales and marketing',[/lead generation/i,/telecalling|cold calling/i,/\bseo\b/i,/social media/i,/sales targets?/i]],
+  ['healthcare and clinical work',[/clinical/i,/patient/i,/pharma/i,/hospital/i]]];
  var NUM={one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10};
  var PREF=/nice to have|preferred|good to have|bonus|desirable|an advantage|a plus\b|plus point|optional/i,HEAD=/^(required|requirements?|qualifications?|must have|responsibilit|what you|key |about you|skills|candidate profile|job description|duties)/i;
  var SAMPLE="Data Analyst\nWe are looking for a Data Analyst with 1+ years of experience. You will build dashboards in Power BI or Tableau, write SQL queries to answer business questions, clean data using Python (Pandas) and Excel, and present insights to stakeholders. Nice to have: Azure, Airflow.";
 
+
+ var NOW=function(){return new Date()},MON=['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
  function li(n,t){return'<li><b>'+n+'</b><span>'+t+'</span></li>'}
  function show(h){out.innerHTML=h;out.hidden=false;out.scrollIntoView({behavior:calm?'auto':'smooth',block:'nearest'})}
  function note(m){return'<p class="fit-note">'+m+'</p>'}
- var INT='His portfolio lists three internships: Data Analyst at KultureHire (Sep \u2013 Oct 2024), Full Stack Developer at Tenet (Dec 2024 \u2013 Jun 2025) and Python Programming at CodeSoft (Aug \u2013 Sep 2023).';
+ function fmt(n){return(Math.round(n*10)/10).toString()}
+ var INT='His portfolio lists three internships, and his data analyst experience is the KultureHire internship (Sep \u2013 Oct 2024).';
  var SOFT=[['communication',/communicat/i],['stakeholder management',/stakeholder/i],['documentation',/documentation/i],['business acumen',/business acumen|business understanding/i],['attention to detail',/attention to detail/i],['problem solving',/problem[- ]solving/i],['teamwork',/team ?work|collaborat/i],['ownership',/\bownership\b/i],['leadership',/leadership|lead a team|mentor/i],['time management',/time management/i]];
- function years(t){var best=0,re=/(\d{1,2}|one|two|three|four|five|six|seven|eight|nine|ten)\s*\+?\s*(?:-|\u2013|to)?\s*(?:\d{1,2}|one|two|three|four|five|six|seven|eight|nine|ten)?\s*\+?\s*(?:years?|yrs?)\b/gi,m;
-  while((m=re.exec(t))){var a=m[1].toLowerCase(),n=NUM[a]||parseInt(a,10);if(!n||n>25)continue;
+ function clean(t){return t.replace(/\[([^\]]*)\]\([^)]*\)/g,'$1').replace(/https?:\/\/\S+/g,' ').replace(/[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g,' ').replace(/(?:\+\d{1,4}\s+){4,}\+?\d*/g,' ').replace(/(?:\+91[\s-]?)?[6-9]\d{9}\b/g,' ').replace(/\b(?:experiance|expreience|exprience|expirience)\b/gi,'experience').replace(/^\s*(?:name|phone|email|resume|upload file|cover letter|submit|apply now|apply|log in|sign up)\s*\*?\s*:?\s*$/gim,' ').replace(/^\s*data science,? analytics (?:&|and) machine learning\s*$/gim,' ')}
+ function exp(t){var best=0,typo=0,mo=null,mtxt='',m,re=/(\d{1,2}|one|two|three|four|five|six|seven|eight|nine|ten)\s*\+?\s*(?:-|\u2013|to)?\s*(?:\d{1,2}|one|two|three|four|five|six|seven|eight|nine|ten)?\s*\+?\s*(?:years?|yrs?)\b/gi;
+  while((m=re.exec(t))){var a=m[1].toLowerCase(),n=NUM[a]||parseInt(a,10);if(!n)continue;
    if(/(?:up to|upto|max(?:imum)?|less than|below|under|within|at most)\s*$/i.test(t.slice(Math.max(0,m.index-22),m.index)))continue;
    var ctx=t.slice(Math.max(0,m.index-70),m.index+m[0].length+70);
-   if(/experience|\bexp\b|background|track record|working as|worked/i.test(ctx)&&!/\bago\b|founded|established|in business/i.test(ctx))best=Math.max(best,n)}return best}
+   if(/experience|\bexp\b|background|track record|working as|worked/i.test(ctx)&&!/\bago\b|founded|established|in business/i.test(ctx)){if(n>15)typo=Math.max(typo,n);else best=Math.max(best,n)}}
+  var hd=/^\s*(\d{1,2})\s*(?:-|\u2013|to)\s*(\d{1,2})\s*(?:years?|yrs?)\s*$/gim;
+  while((m=hd.exec(t))){var l1=parseInt(m[1],10),h1=parseInt(m[2],10);if(l1>0&&h1<=15&&h1>=l1)best=Math.max(best,l1)}
+  var rm=/(\d{1,2})\s*(?:-|\u2013|to)?\s*(\d{1,2})?\s*\+?\s*months?\b/gi;
+  while((m=rm.exec(t))){var c2=t.slice(Math.max(0,m.index-60),m.index+m[0].length+40);
+   if(/experience|\bexp\b/i.test(c2)&&!/notice|probation|stipend|contract|\bago\b/i.test(c2)){var lo=parseInt(m[1],10),hi=m[2]?parseInt(m[2],10):lo;mo=Math.max(mo||0,hi);mtxt=m[2]?lo+'\u2013'+hi:String(lo)}}
+  return{yrs:best,typo:typo,months:mo,mtxt:mtxt}}
+ function pay(t){if(/[$\u20ac\u00a3]|\busd\b|\beur\b|\bgbp\b|\baed\b/i.test(t))return null;
+  var m=t.match(/(\d+(?:\.\d+)?)\s*(?:lpa|lakhs?|lacs?)?\s*(?:-|\u2013|to)\s*(\d+(?:\.\d+)?)\s*(?:lpa|lakhs?|lacs?)/i);
+  if(m)return{lo:parseFloat(m[1]),hi:parseFloat(m[2]),txt:m[1]+' to '+m[2]+' LPA'};
+  m=t.match(/(?:up to|upto|max(?:imum)?)\s*(?:rs\.?|inr|\u20b9)?\s*(\d+(?:\.\d+)?)\s*(?:lpa|lakhs?|lacs?)/i);
+  if(m)return{lo:0,hi:parseFloat(m[1]),txt:'up to '+m[1]+' LPA'};
+  var re=/(?:\u20b9|rs\.?|inr)\s*([\d,]+(?:\.\d+)?)(?:\s*(?:-|\u2013|to)\s*(?:\u20b9|rs\.?|inr)?\s*([\d,]+(?:\.\d+)?))?/gi,x;
+  while((x=re.exec(t))){var tail=t.slice(x.index+x[0].length,x.index+x[0].length+30),mo=/month|monthly|\/\s*mo|\bpm\b/i.test(tail),yr=/year|annum|annual|p\.a|\bctc\b|\/\s*yr/i.test(tail)||/annual|ctc|per annum/i.test(t.slice(Math.max(0,x.index-25),x.index));
+   if(!mo&&!yr)continue;var a=parseFloat(x[1].replace(/,/g,'')),b=x[2]?parseFloat(x[2].replace(/,/g,'')):a,k=mo?12/100000:1/100000,lo=a*k,hi=b*k;if(hi<.3||hi>150)continue;
+   return{lo:lo,hi:hi,txt:'\u20b9'+x[1].replace(/\.00$/,'')+(x[2]?'\u2013\u20b9'+x[2].replace(/\.00$/,''):'')+(mo?' per month':' per year')+' (about '+(x[2]?fmt(lo)+' to '+fmt(hi):fmt(hi))+' LPA)'}}
+  return null}
+ function dates(t){var r=[],m,re1=/\b(\d{1,2})(?:st|nd|rd|th)?\s+(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?,?\s+(20\d\d)\b/gi,re2=/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+(\d{1,2})(?:st|nd|rd|th)?,?\s+(20\d\d)\b/gi;
+  function add(d,mo,y,i,x){r.push({dt:new Date(+y,MON.indexOf(mo.toLowerCase().slice(0,3)),+d),ctx:t.slice(Math.max(0,i-70),i),txt:x})}
+  while((m=re1.exec(t)))add(m[1],m[2],m[3],m.index,m[0]);while((m=re2.exec(t)))add(m[2],m[1],m[3],m.index,m[0]);return r}
+ function domains(t){var head=t.slice(0,250),res='';DOM.forEach(function(d){if(res)return;var n=0,inHead=false;d[1].forEach(function(x){if(x.test(t))n++;if(x.test(head))inHead=true});if(n>=2||inHead)res=d[0]});return res}
  function prac(t){var r=[];function add(s,x){r.push([s,x])}
   var india=/\b(india|nagpur|mumbai|navi mumbai|thane|pune|nashik|bengaluru|bangalore|hyderabad|delhi|noida|gurgaon|gurugram|chennai|kolkata|ahmedabad|jaipur|indore|kochi|chandigarh|coimbatore)\b/i,
    mh=/\b(maharashtra|mumbai|navi mumbai|thane|pune|nashik|nagpur|aurangabad)\b/i,
-   abroad=/\b(usa|united states|uk|united kingdom|germany|berlin|munich|dubai|uae|singapore|canada|australia|netherlands|europe|london|ireland|sweden|switzerland|france|paris|japan|qatar|saudi)\b/i,
-   hasIn=india.test(t),hasAb=abroad.test(t);
-  if(/degree|bachelor|graduat|b\.?tech|qualification/i.test(t))add('ok','Education: Sahil holds a B.Tech in Artificial Intelligence from G H Raisoni College of Engineering and Management (2021 \u2013 2025).');
+   abroad=/\b(usa|united states|uk|united kingdom|germany|berlin|munich|dubai|uae|singapore|canada|australia|netherlands|europe|london|ireland|sweden|switzerland|france|paris|japan|qatar|saudi)\b/i,hasIn=india.test(t),hasAb=abroad.test(t);
+  var fm=t.match(/(?:bachelor'?s?|master'?s?|b\.?tech|degree|graduates?|students?)\s*(?:degree\s*)?(?:in|of)\s+([^.\n]{3,160})/i);
+  if(fm){var fl=fm[1].replace(/\s+/g,' ').trim();if(fl.length>110)fl=fl.slice(0,107)+'...';
+   if(/computer|information technology|\bit\b|artificial intelligence|\bai\b|data|statistic|any (?:stream|discipline|branch|field)|engineering|related field|equivalent/i.test(fm[1]))add('ok','Education: the description lists '+fl+'. Sahil holds a B.Tech in Artificial Intelligence, which is closest to Computer Science and IT.');
+   else add('warn','Education: the description asks for a degree in '+fl+'. Sahil holds a B.Tech in Artificial Intelligence, so please check whether that field is accepted.')}
+  else if(/degree|bachelor|graduat|b\.?tech|qualification/i.test(t))add('ok','Education: Sahil holds a B.Tech in Artificial Intelligence from G H Raisoni College of Engineering and Management (2021 \u2013 2025).');
   var bt=null,rb=/(20\d\d)\s*(?:-|\u2013|to|and|\/)\s*(20\d\d)/g,mm;
   while((mm=rb.exec(t))){var c=t.slice(Math.max(0,mm.index-80),mm.index+mm[0].length+80);if(/batch|passing year|pass(?:ed)? out|graduation year|graduat|passout/i.test(c)){bt=[Math.min(+mm[1],+mm[2]),Math.max(+mm[1],+mm[2])];break}}
   if(bt)add(bt[0]<=2025&&2025<=bt[1]?'ok':'warn','Graduation year: the role asks for the '+bt[0]+'\u2013'+bt[1]+' batches. Sahil graduated in 2025'+(bt[0]<=2025&&2025<=bt[1]?'.':', which is outside that range.'));
@@ -142,39 +182,47 @@ addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(f
   var pc=t.match(/(?:minimum|min\.?|at least|aggregate|marks|percentage)[^.\n]{0,40}?(\d{2}(?:\.\d+)?)\s*%/i);
   if(pc)add('info','Marks: the role mentions at least '+pc[1]+'%. Sahil\'s portfolio shows a CGPA of 6.96 / 10.0, and the percentage depends on his university\'s conversion, so please ask him for the exact figure.');
   if(/\bnagpur\b/i.test(t))add('ok','Location: the role is in Nagpur, where Sahil is based.');
-  else if(hasIn&&!hasAb)add('ok','Location: in India. Sahil is open to relocating to any city'+(mh.test(t)?', and he can join immediately for roles within Maharashtra':'')+'. He needs no visa for roles in India.');
+  else if(hasIn&&!hasAb){var cy=(t.match(/\b(navi mumbai|mumbai|thane|pune|nashik|bengaluru|bangalore|hyderabad|delhi|noida|gurgaon|gurugram|chennai|kolkata|ahmedabad|jaipur|indore|kochi|chandigarh|coimbatore)\b/i)||[])[1];add('ok','Location: '+(cy?cy.replace(/\b\w/g,function(c){return c.toUpperCase()})+', India':'India')+'. Sahil is open to relocating to any city'+(mh.test(t)?', and he can join immediately for roles within Maharashtra':'')+'. He needs no visa for roles in India.')}
   else if(hasAb&&!hasIn)add('warn','Location: this role appears to be outside India. Sahil would need visa sponsorship for it.');
-  var wm=[];if(/work from office|\bwfo\b|on-?site|in-?office/i.test(t))wm.push('on-site');if(/hybrid/i.test(t))wm.push('hybrid');if(/remote|work from home|\bwfh\b/i.test(t))wm.push('remote');
+  var wm=[];if(/work from office|\bwfo\b|on-?site|in-?office|in[- ]person/i.test(t))wm.push('on-site');if(/hybrid/i.test(t))wm.push('hybrid');if(/remote|work from home|\bwfh\b/i.test(t))wm.push('remote');
   if(wm.length)add('ok','Work mode: '+wm.join(' / ')+'. Sahil is fine with remote, hybrid or on-site work.');
   var jn=t.match(/immediate(?:ly)?\s*(?:to|-|\u2013)\s*(\d{1,3})\s*days/i),up=t.match(/(?:notice period|joining|join)[^.\n]{0,40}?(?:up to|upto|max(?:imum)?|within|not more than)\s*(\d{1,3})\s*days/i);
   if(jn)add(parseInt(jn[1],10)>=15?'ok':'warn','Joining: the role allows immediate to '+jn[1]+' days. Sahil\'s notice period is 15 days, and he can join immediately within Maharashtra.');
   else if(up)add(parseInt(up[1],10)>=15?'ok':'warn','Joining: the role allows up to '+up[1]+' days. Sahil\'s notice period is 15 days, and he can join immediately within Maharashtra.');
-  else if(/immediate joiners?|immediate joining/i.test(t))add('warn','Joining: the role prefers immediate joiners. Sahil can join immediately only for roles within Maharashtra; otherwise his notice period is 15 days.');
-  if(!/[$\u20ac\u00a3]|\busd\b|\beur\b|\bgbp\b|\baed\b/i.test(t)){var sm=t.match(/(\d+(?:\.\d+)?)\s*(?:lpa|lakhs?|lacs?)?\s*(?:-|\u2013|to)\s*(\d+(?:\.\d+)?)\s*(?:lpa|lakhs?|lacs?)/i),sx=t.match(/(?:up to|upto|max(?:imum)?)\s*(?:rs\.?|inr|\u20b9)?\s*(\d+(?:\.\d+)?)\s*(?:lpa|lakhs?|lacs?)/i),lo=0,hi=0;
-   if(sm){lo=parseFloat(sm[1]);hi=parseFloat(sm[2])}else if(sx)hi=parseFloat(sx[1]);
-   if(hi){var s4=4.5;add(s4>hi?'warn':'ok','Salary: '+(lo?lo+' to '+hi:'up to '+hi)+' LPA is stated. Sahil\'s expectation is around 4.5 LPA, which is '+(s4>hi?'above the top of that range':(s4<lo?'below that range':'within it'))+', and he is open to discussion based on the role and growth.')}}
+  else if(/immediate joiners?|immediate joining|urgent(?:ly)? (?:required|hiring|need)|urgent requirement/i.test(t))add('info','Joining: the role is hiring urgently. Sahil\'s notice period is 15 days, and he can join immediately for roles within Maharashtra.');
+  var p=pay(t);
+  if(p){var s4=4.5;add(s4>p.hi?'warn':'ok','Pay: '+p.txt+' is stated. Sahil\'s expectation is around 4.5 LPA, which is '+(s4>p.hi?((p.lo&&p.lo!==p.hi)?'above the top of that range':'above that amount'):(p.lo&&s4<p.lo?'below that range':'within it'))+', and he is open to discussion based on the role and growth.')}
   var lg=t.match(/\b(german|french|spanish|japanese|mandarin|arabic|dutch)\b/i);
   if(lg&&/fluen|proficien|required|mandatory|must|native/i.test(t))add('warn','Language: the role mentions '+lg[1]+'. Sahil speaks English, Hindi and Marathi, with basic German only.');
   var ce=t.match(/pl-?300|az-?900|dp-?900|dp-?203|aws certified[^.\n]{0,25}|tableau (?:desktop )?(?:specialist|certified|certification)|google data analytics|\bpmp\b|\bcfa\b|six sigma|scrum master|cissp|\bccna\b/i);
   if(ce)add('warn','Certification: the description mentions '+ce[0].trim()+', which is not on his list (Accenture, IBM, NVIDIA and Indian Blockchain Institute).');
+  if(/github|coding project|portfolio projects?/i.test(t)&&/apply|share|submit|send|strengthen/i.test(t))add('ok','Application: the description asks for or welcomes a GitHub link or project work. Sahil has public projects on GitHub (github.com/Chauhansahiil).');
   var un=[];if(/\bshifts?\b/i.test(t))un.push('shift timings');if(/service bond|bond period|\bbond\b/i.test(t))un.push('a service bond');if(/\btravel/i.test(t))un.push('travel');if(/case study|assignment|coding test|take-?home/i.test(t))un.push('a test or assignment');
   if(un.length)add('info','The description mentions '+un.join(', ')+'. His portfolio does not cover this, so please ask him directly.');
+  var now=NOW(),today=new Date(now.getFullYear(),now.getMonth(),now.getDate()),shown=false;
+  dates(t).forEach(function(d){if(/clos|deadline|last date|apply by|valid (?:till|until)|expires?/i.test(d.ctx)){if(d.dt<today)add('warn','Closing date: the posting says applications close on '+d.txt+', which has passed.')}else if(!shown&&d.dt.getFullYear()<=now.getFullYear()-1){add('info','Posting date: this description is dated '+d.txt+', so the role may no longer be open.');shown=true}});
+  var pr=/posted:?\s*(?:over\s*)?(\d+)\s*(day|week|month|year)s?\s*ago/gi,px,mx=0,pt='';
+  while((px=pr.exec(t))){var dd=parseInt(px[1],10)*({day:1,week:7,month:30,year:365}[px[2].toLowerCase()]);if(dd>mx){mx=dd;pt=px[1]+' '+px[2].toLowerCase()+(px[1]==='1'?'':'s')+' ago'}}
+  if(mx>=30&&!shown)add('info','Posting age: it says posted '+pt+', so the role may no longer be open. Please confirm on the employer\'s page.');
   return r}
- function run(){var t=inp.value.trim();
+ function run(){var raw=inp.value,t=clean(raw).trim();
+  if((raw.match(/full job description/gi)||[]).length>=2)return show(note('It looks like more than one job description was pasted together. Please paste one description at a time so the comparison stays accurate.'));
   if(t.split(/\s+/).length<8)return show(note('That is too short to be a job description. Please paste the full text, including the requirements.'));
   var letters=t.replace(/[^\p{L}]/gu,''),latin=t.replace(/[^A-Za-z]/g,'');
   if(letters.length&&latin.length/letters.length<.6)return show(note('I can only compare English job descriptions. Please paste the text in English.'));
   var cls={},lines=t.split(/\n+|[.!?;]\s+/),mode='req';
   lines.forEach(function(L){var s=L.trim();if(!s)return;var head=s.length<60&&(/:\s*$/.test(s)||((PREF.test(s)||HEAD.test(s))&&s.split(/\s+/).length<=3));
    if(head&&PREF.test(s))mode='pref';else if(head&&HEAD.test(s))mode='req';
-   var m=(!head&&PREF.test(s))?'pref':mode;
-   SK.concat(GAP).forEach(function(k){if(k[1].test(s)){if(m==='req')cls[k[0]]='req';else if(!cls[k[0]])cls[k[0]]='pref'}})});
-  var hit=SK.filter(function(s){return cls[s[0]]}),miss=GAP.filter(function(s){return cls[s[0]]});
+   if(/to apply|how to apply|share your (?:cv|resume)|send your (?:cv|resume)|submit your (?:cv|resume)|apply now|apply by/i.test(s))return;
+   var m=(!head&&PREF.test(s))?'pref':mode,sh=SK.filter(function(k){return k[1].test(s)}),sg=GAP.filter(function(k){return k[1].test(s)});
+   if(sh.length&&sg.length&&/\bor\b|\//i.test(s))sg=[];
+   sh.concat(sg).forEach(function(k){if(m==='req')cls[k[0]]='req';else if(!cls[k[0]])cls[k[0]]='pref'})});
+  var hit=SK.filter(function(s){return cls[s[0]]}),miss=GAP.filter(function(s){return cls[s[0]]}),dom=domains(t);
   if(hit.some(function(s){return s[0]==='Power BI / DAX'||s[0]==='Tableau'}))hit=hit.filter(function(s){return s[0]!=='Data visualization'});
   if(!hit.length&&!miss.length){var nt=/nurse|doctor|physician|driver|mechanic|electrician|plumber|chef|waiter|teacher|accountant|cashier|warehouse|civil engineer|mechanical engineer|security guard|sales executive|retail/i.test(t);
-   return show(note(nt?'This looks like a role outside data, AI and software, so Sahil\'s profile is not a match for it.':'I could not recognise any tools or skills here that I can compare with Sahil\'s profile. It may not be a technical job description, or it may use terms I do not check. Please read it yourself or ask Sahil directly.'))}
-  var yrs=years(t),senior=/\bsenior\b|\bprincipal\b|\bstaff\b|\bhead of\b|\bdirector\b|\bmanager\b|\blead\b|\barchitect\b/i.test(t.slice(0,160)),
-   fresher=/fresher|entry[- ]level|trainee|junior|campus hire|recent graduate|fresh graduate|new graduate|0\s*(?:-|\u2013|to)\s*[12]\s*years?|no (?:prior )?experience (?:required|needed)|up to \d+ years? of/i.test(t),
+   return show(note(dom?'This role is centred on '+dom+', which is outside Sahil\'s listed experience, and I could not recognise any tools here that I can compare with his profile.':(nt?'This looks like a role outside data, AI and software, so Sahil\'s profile is not a match for it.':'I could not recognise any tools or skills here that I can compare with Sahil\'s profile. It may not be a technical job description, or it may use terms I do not check. Please read it yourself or ask Sahil directly.')))}
+  var x0=exp(t),yrs=x0.yrs,senior=/\bsenior\b|\bprincipal\b|\bstaff\b|\bhead of\b|\bdirector\b|\bmanager\b|\blead\b|\barchitect\b/i.test(t.slice(0,160)),
+   fresher=/fresher|entry[- ]level|trainee|junior|campus hire|recent graduate|fresh graduate|new graduate|0\s*(?:-|\u2013|to)\s*[12]\s*years?|(?:prior |previous )?(?:professional )?experience (?:is )?not (?:required|needed)|no (?:prior )?experience (?:required|needed)|up to \d+ years? of/i.test(t)||(x0.months!==null&&x0.months<=12),
    masters=/(?:master'?s|\bm\.?sc\b|\bm\.?tech\b|post[- ]?graduate|\bph\.?d\b|doctorate)[^.\n]{0,40}(?:required|mandatory|preferred|degree)|(?:required|mandatory|preferred)[^.\n]{0,40}(?:master'?s|\bm\.?sc\b|\bm\.?tech\b|post[- ]?graduate|\bph\.?d\b|doctorate)/i.test(t);
   var rh=hit.filter(function(s){return cls[s[0]]==='req'}),rm=miss.filter(function(s){return cls[s[0]]==='req'}),rt=rh.length+rm.length;
   var bt=hit.length+miss.length,ratio=rt?rh.length/rt:hit.length/bt,sk=ratio>=.7?'ok':(ratio>=.4?'warn':'bad');
@@ -182,23 +230,28 @@ addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(f
   var lv=(sk==='bad'||ex==='bad')?'bad':((sk==='warn'||ex==='warn'||edge)?'warn':'ok');
   var title={ok:'Good match',warn:'Partial match',bad:'Not a match yet'}[lv];
   if(ex==='bad'&&sk!=='bad')title='Too senior for now';else if(ex==='warn'&&sk==='ok')title='A stretch on experience';else if(edge&&sk==='ok')title='Good skills match, experience at the edge';
+  if(dom&&ex!=='bad'){if(sk==='ok'){lv='warn';title='Skills overlap, different domain'}else if(sk==='warn'){lv='warn';title='Partial match: domain knowledge needed'}}
   var pr=prac(t),parts=[];
   parts.push(rt?('Required skills: '+rh.length+' of '+rt+' are on Sahil\'s list.'):('Skills mentioned: '+hit.length+' of '+bt+' are on Sahil\'s list.'));
-  if(yrs>=1)parts.push('The description asks for '+yrs+'+ years of experience. Sahil graduated in 2025. '+INT+' His data analyst experience is the KultureHire internship, and his portfolio does not show a full year in an analyst role.');
+  if(yrs>=1)parts.push('The description asks for '+yrs+'+ years of experience. Sahil graduated in 2025. '+INT+' His portfolio does not show a full year in an analyst role.');
+  else if(x0.months!==null)parts.push('The description asks for '+x0.mtxt+' months of experience, so it suits freshers. Sahil graduated in 2025. '+INT);
   else if(fresher)parts.push('The description looks suitable for freshers and juniors. Sahil graduated in 2025. '+INT);
   else parts.push('No minimum experience is stated. Sahil graduated in 2025. '+INT);
+  if(dom)parts.push('The role is centred on '+dom+', which is outside Sahil\'s listed experience.');
+  if(fresher&&sk!=='ok')parts.push('The role is open to freshers, but its main requirements listed here are not yet shown on his portfolio.');
   if(lv==='ok')parts.push('This reads as a reasonable fit for his current level.');
   if(ex==='bad')parts.push('Applying could still be worth a try if you are flexible on experience, but this is a stretch.');
   if(pr.some(function(p){return p[0]==='warn'}))parts.push('Some practical points below need a check.');
   var h='<div class="fit-verdict '+lv+'"><b>'+title+'</b><span>'+parts.join(' ')+'</span></div><div class="fit-cols">'+
    '<div class="fit-col ok"><h4>Where he fits</h4><ul>'+(hit.length?hit.map(function(s){return li(s[0]+(cls[s[0]]==='pref'?' (nice to have)':''),s[2])}).join(''):'<li><span>No direct matches found.</span></li>')+'</ul></div>'+
-   '<div class="fit-col no"><h4>Not on his list yet</h4><ul>'+(miss.length?miss.map(function(s){return li(s[0]+(cls[s[0]]==='pref'?' (nice to have)':''),'Not listed. Closest he works with: '+s[2]+'.')}).join(''):'<li><span>None of the tools I check for.</span></li>')+'</ul></div></div>';
+   '<div class="fit-col no"><h4>Not on his list yet</h4><ul>'+(miss.length?miss.map(function(s){return li(s[0]+(cls[s[0]]==='pref'?' (nice to have)':''),s[2]?'Not listed. Closest he works with: '+s[2]+'.':'Not listed on his portfolio.')}).join(''):'<li><span>None of the tools I check for.</span></li>')+'</ul></div></div>';
   if(pr.length)h+='<div class="fit-prac"><h4>Practical fit</h4><ul>'+pr.map(function(p){return'<li class="'+p[0]+'"><i>'+({ok:'\u2713',warn:'!',info:'i'}[p[0]])+'</i><span>'+p[1]+'</span></li>'}).join('')+'</ul></div>';
   var ns=[],sf=SOFT.filter(function(s){return s[1].test(t)}).map(function(s){return s[0]});
   if(/advanced excel/i.test(t))ns.push('It asks for Advanced Excel. He lists pivot tables and VLOOKUP, and whether that counts as advanced is something he can show in an interview.');
+  if(x0.typo)ns.push('The description mentions '+x0.typo+' years of experience, which looks like a typo (for example 2\u20135). Please check the original posting.');
   if(sf.length)ns.push('Soft skills mentioned ('+sf.join(', ')+') are not scored, because a portfolio cannot prove them.');
   if(senior)ns.push('The title sounds senior, which may involve ownership or leading others.');if(masters)ns.push('It mentions a master\'s degree or PhD as required or preferred. Sahil holds a B.Tech.');
-  ns.push('Not compared: domain knowledge and anything the checker does not recognise. This is a keyword check against his portfolio, not a hiring decision, so please read the full description too.');
+  ns.push('This is a keyword comparison against his portfolio, not a hiring decision, so please read the full description too.');
   h+='<ul class="fit-notes">'+ns.map(function(x){return'<li>'+x+'</li>'}).join('')+'</ul>';
   h+='<div class="fit-cta"><a class="pillbtn" href="'+resume+'"'+(resume[0]==='#'?'':' target="_blank" rel="noopener"')+'>Download resume</a><a class="pillbtn ghost" href="#contact">Contact Sahil</a><button type="button" class="pillbtn ghost" id="fit-ai">Ask the AI more</button></div>';
   show(h);var b=$('#fit-ai');if(b)b.onclick=function(){openAI(true)}}
