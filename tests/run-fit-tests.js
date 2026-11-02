@@ -26,7 +26,7 @@ var CASES=[
  {f:'junior-analyst-fresher.txt',title:'Good match',has:['Pune','3 to 4 LPA','above the top of that range'],not:['Too senior']},
  {f:'one-to-three-years.txt',title:'Good skills match, experience at the edge',has:['1+ years','allows up to 30 days','Mumbai']},
  {f:'pasted-with-phone-numbers.txt',title:'Good match',has:['2.5 to 3.5 LPA','above the top of that range'],not:['9876543210','example.com']},
- {f:'several-pasted-together.txt',msg:'more than one job description'},
+ {f:'several-pasted-together.txt',msg:'more than one job description'},  
  {f:'junk-form-only.txt',msg:'too short'}];
 var bad=0;
 if(process.argv[2]==='--show'){CASES.forEach(function(c){mk('#fit-in').value=text(c.f);mk('#fit-run').onclick();var h=mk('#fit-out').innerHTML.replace(/<li class="(\w+)"><i>[^<]*<\/i><span>/g,'\n   [$1] ').replace(/<li><b>/g,'\n   - ').replace(/<\/b><span>/g,': ').replace(/<\/(?:h4|div|ul|p)>/g,'\n').replace(/<[^>]+>/g,' ').replace(/[ ]+/g,' ');console.log('=== '+c.f+'\n'+h)});process.exit(0)}

@@ -78,6 +78,7 @@ function frame(){tick=false;
 addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(frame)}},{passive:true});addEventListener('resize',frame);frame();
 
 /* ---------- job fit checker (runs only in the browser, nothing is sent) ---------- */
+var SKILLDATA=null;
 (function(){var inp=$('#fit-in'),out=$('#fit-out');if(!inp)return;
  var SK=[
   ['SQL',/\bsql\b|mysql|postgres|t-?sql/i,'Strong SQL: CTEs, window functions and subqueries in his Customer Trends project, plus MySQL at Tenet.'],
@@ -126,6 +127,7 @@ addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(f
   ['embedded and mechanical engineering',[/embedded/i,/firmware/i,/\bplc\b/i,/scada/i,/solidworks/i,/\bcnc\b/i]],
   ['sales and marketing',[/lead generation/i,/telecalling|cold calling/i,/\bseo\b/i,/social media/i,/sales targets?/i]],
   ['healthcare and clinical work',[/clinical/i,/patient/i,/pharma/i,/hospital/i]]];
+ SKILLDATA={SK:SK,GAP:GAP};
  var NUM={one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10};
  var PREF=/nice to have|preferred|good to have|bonus|desirable|an advantage|a plus\b|plus point|optional/i,HEAD=/^(required|requirements?|qualifications?|must have|responsibilit|what you|key |about you|skills|candidate profile|job description|duties)/i;
  var SAMPLE="Data Analyst\nWe are looking for a Data Analyst with 1+ years of experience. You will build dashboards in Power BI or Tableau, write SQL queries to answer business questions, clean data using Python (Pandas) and Excel, and present insights to stakeholders. Nice to have: Azure, Airflow.";
@@ -256,6 +258,7 @@ addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(f
   h+='<div class="fit-cta"><a class="pillbtn" href="'+resume+'"'+(resume[0]==='#'?'':' target="_blank" rel="noopener"')+'>Download resume</a><a class="pillbtn ghost" href="#contact">Contact Sahil</a><button type="button" class="pillbtn ghost" id="fit-ai">Ask the AI more</button></div>';
   show(h);var b=$('#fit-ai');if(b)b.onclick=function(){openAI(true)}}
  out.addEventListener('pointermove',function(ev){var el=ev.target.closest?ev.target.closest('.fit-col,.fit-prac'):null;if(!el)return;var q=el.getBoundingClientRect();el.style.setProperty('--mx',(ev.clientX-q.left)+'px');el.style.setProperty('--my',(ev.clientY-q.top)+'px')});
+ $('#fit-clear').onclick=function(){inp.value='';cnt();out.hidden=true;out.innerHTML='';inp.focus()};
  $('#fit-run').onclick=run;$('#fit-sample').onclick=function(){inp.value=SAMPLE;cnt();run()};
  function cnt(){$('#fit-count').textContent=inp.value.length+' / 6000'}inp.addEventListener('input',cnt)})();
 
@@ -320,22 +323,59 @@ var GAPANS="Sahil has not listed big-data and cloud tools such as Spark, Kafka, 
 function gapsQ(q){var s=q.toLowerCase();return/(\bnot|n't|\bdoesnt|\bdont|\bnever)\s+(know|use|familiar|skilled)|skill gaps?|tool gaps?|knowledge gaps?|missing skills?|what.{0,20}\blacks?\b/.test(s)}
 var box=$('#ai'),msgs=$('#msgs'),inp=$('#ai-in');
 function add(h,me){var d=document.createElement('div');d.className='m '+(me?'me':'bot');if(me)d.textContent=h;else d.innerHTML=h;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;return d}
+var matchScore=0;
 function match(q){var w=q.toLowerCase().replace(/[^a-z0-9. ]/g,' ').split(/\s+/).filter(Boolean),best=null,top=0;
-  KB.forEach(function(e){var s=0,ks=e.k.split(' ');w.forEach(function(t){if(t.length>1&&ks.some(function(k){return k===t||(t.length>3&&k.length>5&&(k.indexOf(t)===0||t.indexOf(k)===0))}))s++});if(s>top){top=s;best=e}});return best}
+  KB.forEach(function(e){var s=0,ks=e.k.split(' ');w.forEach(function(t){if(t.length>1&&ks.some(function(k){return k===t||(t.length>3&&k.length>5&&(k.indexOf(t)===0||t.indexOf(k)===0))}))s++});if(s>top){top=s;best=e}});matchScore=top;return best}
 var hist=[],AI=C.AI_ENDPOINT||(C.WORKER_URL?C.WORKER_URL+'/chat':'');
 function fmt(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/(https?:\/\/[^\s)]+[^\s).,;:])/g,'<a href="$1" target="_blank" rel="noopener">$1</a>').replace(/\n/g,'<br>')}
+var SUG=['What are his projects?','What are his skills?','Is he available?','Get his resume','How can I contact him?'];
+function fallback(){return"I couldn't find that on Sahil's portfolio. Here is what I can help with: "+SUG.map(function(s){return'<button type="button" class="rolebtn" data-q="'+s+'">'+s.replace(/\?$/,'')+'</button>'}).join(' ')+" Or "+A('#contact','message Sahil directly')+"."}
+var TALK=[
+ [/^\s*(?:hi+|hello+|hey+|hlo|helo|yo|namaste|good (?:morning|afternoon|evening)|hello there|hi there)\s*[!.?]*\s*$/i,"Hi! Ask me about Sahil's projects, skills, experience, education, or ask for his resume."],
+ [/\b(?:thanks|thank you|thankyou|thx|tysm|appreciate it)\b/i,"You're welcome! Let me know if there is anything else you would like to know about Sahil."],
+ [/^\s*(?:ok(?:ay)? )?(?:bye|goodbye|see you|see ya|take care)\b/i,"Thanks for stopping by! You can reach Sahil anytime through the "+A('#contact','contact section')+"."]];
+var INTENTS=[
+ [/who (?:are|r) (?:you|u)\b|what (?:are|r) (?:you|u)\b|are you (?:an? )?(?:ai|bot|human|real|robot|chatgpt|gpt|claude)|your name/i,"I'm the AI assistant on Sahil's portfolio. I answer questions about his projects, skills, experience, education and availability using the information on this site, and I can share his resume."],
+ [/(?:how|who|when|with what|using what|what).{0,30}(?:built|build|made|make|created|create|developed|develop|trained|train|coded|designed|work|works)\b.{0,25}\b(?:you|this (?:chat|bot|assistant|portfolio|website|site|page)|the (?:portfolio|website|site|assistant|bot))\b|what (?:tech|technology|stack|tools?|language)\b.{0,30}(?:portfolio|website|site|you)|(?:portfolio|website|site)\b.{0,15}(?:built|made) with/i,"This portfolio is a 2026 build made with HTML, CSS and JavaScript. I'm the assistant on it: I answer from the information on Sahil's portfolio, with a small Cloudflare Worker and an AI model behind me for open-ended questions. The exact date he started building the site isn't listed."],
+ [/(?:when|what date|which month|how long|how many months|date|timeline|duration).{0,40}(?:project|app|system|dashboard|paper|research)|(?:project|app|system|dashboard|paper|research).{0,40}(?:when|date|timeline|duration|how long)|(?:start|started|began|begin|completed|finished).{0,40}(?:project|banking|blockchain|customer trends|dashboard)/i,"His portfolio doesn't give start or completion dates for the projects. The blockchain banking work was published as a research paper in IJIRT in December 2024 ("+A(PAPER,'read the paper')+"), and both projects are public on GitHub: "+A(GH,'github.com/Chauhansahiil')+"."],
+ [/graduat|passed out|pass ?out|passout|(?:complete|completed|completing|finish|finished|finishing)\b.{0,25}(?:b\.?tech|btech|degree|engineering|college|studies)|(?:b\.?tech|btech|degree).{0,25}(?:complete|completed|finish|finished|year)|which year.{0,20}(?:b\.?tech|btech|degree|college)|year of (?:passing|graduation)|passing year|graduation year/i,"Sahil graduated in 2025. He completed his B.Tech in Artificial Intelligence at G H Raisoni College of Engineering and Management, Nagpur (2021 \u2013 2025) with a CGPA of 6.96 / 10, after scoring 77% in XII (HSC) at Sindhu College in 2021."],
+ [/\bfresher\b|how many years|years of experience|how much experience|total experience|work(?:ing)? experience|full[- ]?time (?:job|experience|role)|currently (?:working|employed)|current (?:job|employer|company|status|position)|is he (?:working|employed|experienced)/i,"Sahil graduated in 2025 and is open to opportunities, mainly Data Analyst and related roles. His portfolio lists three internships (Data Analyst at KultureHire, Full Stack Developer at Tenet and Python Programming at CodeSoft) and no full-time roles. It doesn't state his current employment status, so please ask him directly if you need that."],
+ [/e-?mail/i,"Email: chauhansahil03115@gmail.com. You can also use the "+A('#contact','contact form')+" or find him on "+A(LI,'LinkedIn')+"."],
+ [/\b(?:phone|mobile|whatsapp|call)\b|contact number|home address|postal address|residential|hometown|home town/i,"His phone number isn't listed on the portfolio. You can reach him at chauhansahil03115@gmail.com, through the "+A('#contact','contact form')+", or on "+A(LI,'LinkedIn')+"."],
+ [/\bage\b|how old|date of birth|\bdob\b|birthday|married|marital|\bwife\b|girlfriend|boyfriend|religion|\bcaste\b|politic|parents|\bfather\b|\bheight\b|\bweight\b/i,"Personal details like that aren't shared on Sahil's portfolio. I can help with his professional background, or you can "+A('#contact','contact him directly')+"."],
+ [/linkedin|github|git hub|social media|profile link|portfolio link/i,"You can find Sahil on "+A(GH,'GitHub')+" and "+A(LI,'LinkedIn')+"."],
+ [/night shift|rotational shift|\bshifts?\b|\btravel|service bond|\bbond\b|weekend/i,"His portfolio doesn't cover shift timings, travel or service-bond preferences, so please ask him directly through the "+A('#contact','contact form')+"."],
+ [/freelanc|part[- ]?time|contract (?:work|role|basis)|consult/i,"His portfolio says he is open to Data Analyst and related roles, and it doesn't mention freelance, part-time or contract work, so please "+A('#contact','contact him directly')+" to discuss it."]];
+function pick(list,q){for(var i=0;i<list.length;i++)if(list[i][0].test(q))return list[i][1];return''}
+function skillQ(q){var D=SKILLDATA;if(!D)return'';
+ if(!/know|\buse\b|\bused\b|experience|familiar|skill|good|strong|level|proficien|comfortable|worked|work with|can he|does he have|has he|expert|ability|handle|rate|how well/i.test(q))return'';
+ function qre(k){return k[0]==='R'?/\bR(?:[\s?,.)\/]|$)|\bknow r\b|\buse r\b/:k[1]}
+ var hit=D.SK.filter(function(k){return qre(k).test(q)}),miss=D.GAP.filter(function(k){return k[1].test(q)});
+ if(hit.some(function(k){return k[0]==='Power BI / DAX'||k[0]==='Tableau'}))hit=hit.filter(function(k){return k[0]!=='Data visualization'});
+ if(!hit.length&&!miss.length)return'';
+ function rich(n){var key={SQL:'sql joins',Python:'python pandas'}[n];if(!key)return'';for(var i=0;i<KB.length;i++)if(KB[i].k.indexOf(key)===0)return KB[i].a;return''}
+ if(hit.length===1&&!miss.length)return rich(hit[0][0])||('Yes. '+hit[0][2]);
+ var p=[];hit.slice(0,4).forEach(function(h){p.push(h[0]+': '+h[2])});
+ miss.slice(0,3).forEach(function(m){p.push(m[0]+' is not on his skills list'+(m[2]?'; the closest he works with is '+m[2]:'')+'.')});
+ return(hit.length?'Yes. ':'')+p.join(' ')}
+function route(q){var r=pick(TALK,q);if(r)return{a:r};
+ if(gapsQ(q))return{a:GAPANS};
+ r=skillQ(q);if(r)return{a:r};
+ r=pick(INTENTS,q);if(r)return{a:r};
+ r=future(q);if(r)return{a:r};
+ var hit=match(q);
+ if(hit&&(hit.det||matchScore>=2))return{a:hit.a,hit:hit};
+ return{a:'',hit:hit}}
 function ask(q){q=q.trim();if(!q)return;add(q,true);var t=add('<span class="dots"><i></i><i></i><i></i></span>');
   function say(h){setTimeout(function(){t.innerHTML=h;msgs.scrollTop=msgs.scrollHeight},calm?0:300)}
-  var hit=match(q),fb='I only know what is on this portfolio. Try asking about his projects, skills, experience, education or resume, or '+A('#contact','message Sahil directly')+'.';
-  if(gapsQ(q))return say(GAPANS);
-  if(hit&&hit.det)return say(hit.a);
-  var tc=toolCheck(q);if(tc)return say(tc);
-  var fu=future(q);if(fu)return say(fu);
-  if(!AI)return say(hit?hit.a:fb);
-  fetch(AI,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q,history:hist.slice(-6)})})
-   .then(function(r){if(!r.ok)throw 0;return r.json()})
-   .then(function(j){if(!j.answer)throw 0;hist.push({role:'user',content:q},{role:'assistant',content:j.answer});say(fmt(j.answer))})
-   .catch(function(){say(hit?hit.a:fb)})}
+  var r=route(q);if(r.a)return say(r.a);
+  var back=r.hit?r.hit.a:fallback();
+  if(!AI)return say(back);
+  var ctl=window.AbortController?new AbortController():null,tm=ctl?setTimeout(function(){ctl.abort()},12000):0;
+  fetch(AI,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q,history:hist.slice(-6)}),signal:ctl?ctl.signal:undefined})
+   .then(function(x){clearTimeout(tm);if(!x.ok)throw new Error('HTTP '+x.status);return x.json()})
+   .then(function(j){if(!j.answer)throw new Error('empty answer');hist.push({role:'user',content:q},{role:'assistant',content:j.answer});say(fmt(j.answer))})
+   .catch(function(err){clearTimeout(tm);console.warn('[assistant] AI unavailable, using built-in answers:',err&&err.message);say(back)})}
 function greet(){msgs.innerHTML='';hist=[];add('Hi, I\'m Sahil\'s AI assistant. Ask me anything about his projects, skills, experience or education, or ask for his resume.')}
 function openAI(v){box.hidden=!v;document.body.classList.toggle('ai-open',v);$('#ai-fab').style.display=v?'none':'';if(v){inp.focus();if(!msgs.children.length)greet()}else $('#ai-fab').focus()}
 (function(){msgs.setAttribute('aria-live','polite');

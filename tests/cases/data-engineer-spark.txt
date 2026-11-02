@@ -1,0 +1,1 @@
+Data Engineer. 2 years experience building pipelines with Spark, Kafka, Airflow and Databricks on Azure. Strong SQL and Python required. Snowflake is a plus.

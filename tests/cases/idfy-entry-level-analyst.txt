@@ -1,0 +1,47 @@
+IDfy is hiring a Entry Level Data Analyst in Nagpur. This is a full-time, permanent role for candidates who want to work on real data analytics problems.
+About the role
+This Entry Level Data Analyst role is hands-on and delivery-focused. Expect an entry-level analytics seat — SQL, Excel and Power BI applied to real reporting from day one, working primarily in SQL, Excel and Power BI.
+Key responsibilities
+• Prepare and clean datasets for the analytics team under a senior analyst
+• Build simple dashboards and recurring reports, reviewed before release
+• Run first-pass analyses and summarise what the data shows
+• Cross-check published numbers against source systems
+• Document your queries and steps so the work is repeatable
+• Automate recurring reporting so the team spends its time on analysis rather than refreshes
+• Present findings to non-technical stakeholders in clear, plain language
+Required skills and tools
+• SQL
+• Advanced Excel
+• Power BI
+• Tableau
+• Python (Pandas)
+• Data Cleaning
+• Data Visualization
+• Descriptive Statistics
+• Dashboarding
+• Business Acumen
+• Stakeholder Communication
+• Documentation
+Eligibility criteria
+• Education: any graduate — B.E./B.Tech, B.Sc, BCA/MCA, B.Com, BBA or MBA. Candidates from any recognised university are welcome.
+• Graduation year: 2023–2026 batches. Freshers and final-year students awaiting results may apply.
+• Minimum 60% / 6.0 CGPA in the highest qualification (indicative — strong practical skills can offset this).
+• Experience: 0–1 years in analytics, reporting, MIS or a closely related function.
+• Technical skills: SQL, Advanced Excel, Power BI, Tableau, Python (Pandas), Data Cleaning.
+• Soft skills: structured thinking, attention to detail, stakeholder communication, ownership and the confidence to flag a number that looks wrong.
+Salary and compensation
+• Annual CTC: ₹2,40,000 – ₹4,80,000 per year (2.4 LPA – 4.8 LPA), an indicative market range for this role in Nagpur.
+Location, work mode and employment type
+• Location: Nagpur, Maharashtra
+• Work mode: Work From Office
+• Employment type: Full-time, permanent
+• Working hours: 9:30 AM – 6:30 PM, Monday to Friday
+• Joining: immediate to 60 days, as per your notice period
+Selection process
+• Round 2 — Technical interview 2 — BI tooling, dashboard design and metric definition
+Who should apply
+Candidates from any graduate — B.E./B.Tech, B.Sc, BCA/MCA, B.Com, BBA or MBA with up to 1 years of relevant experience who are based in Nagpur or willing to relocate.
+Additional information
+• Documents required at the interview stage: updated resume, degree certificates or provisional certificate, and government photo ID.
+How to apply
+Applications close on 18 October 2026 and are reviewed on a rolling basis, so apply early.

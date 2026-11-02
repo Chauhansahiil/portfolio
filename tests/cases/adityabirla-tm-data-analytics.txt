@@ -1,0 +1,14 @@
+TM Data Analytics
+Aditya Birla Group
+Data Science Analytics & Machine Learning
+Posted: 5 months ago
+0-1 years
+Nagpur, Maharashtra
+work from office
+Full Time
+Job Description
+The role involves working closely with manufacturing, supply chain, sales, marketing, and HR functions to support data-driven decision-making. It requires a strong understanding of plant operations, ERP systems, warehouse management, and business processes, combined with analytical skills gained through structured training in data analytics. The position supports digital transformation initiatives by developing dashboards, performing exploratory data analysis, building analytics models, and coordinating with cross-functional teams to translate raw data into actionable insights.
+Major Challenges
+A key challenge of the role is integrating diverse and complex datasets originating from multiple operational systems such as ERP, CPD, warehouse systems, and sales platforms, while ensuring data accuracy and consistency. Bridging the gap between technical analytics outputs and practical business requirements across non-technical stakeholders also demands continuous coordination and clear communication.
+Skills
+Advanced Analytics Data Analytics Data Analysis Erp Analytics

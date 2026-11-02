@@ -1,0 +1,31 @@
+SolarSquare Energy - Business Analyst - Data Visualization
+Solar Square
+Data Science Analytics & Machine Learning
+Posted: 1 year ago
+2-4 years
+Nagpur, Maharashtra
+work from office
+Full Time
+Posted over 15 days ago, so the role may have closed.
+Job Description
+About SolarSquare :
+- At SolarSquare we are building the Home-Energy brand of future India.
+- We help homes switch to rooftop solar and move away from traditional coal electricity.
+Key Responsibilities
+- Collect, clean, and validate large datasets from multiple sources.
+- Analyze data to identify trends, patterns, and correlations that impact business outcomes.
+- Develop and maintain dashboards, reports, and visualizations to track KPIs and business performance.
+- Partner with cross-functional teams (sales, marketing, finance, operations) to provide datadriven recommendations.
+- Perform ad-hoc analysis to support strategic and operational initiatives.
+- Use statistical methods to interpret data and build predictive models where necessary.
+- Ensure data integrity, accuracy, and compliance with company policies.
+Requirements
+- Bachelors degree in Data Science, Statistics, Mathematics, Computer Science, Economics, or related field.
+- 25 years of proven experience as a Data Analyst or in a similar role.
+- Strong proficiency in SQL, Excel, and data visualization tools (Power BI, Tableau, or similar).
+- Hands-on experience with Python/R for data analysis is a plus.
+- Solid understanding of statistical methods and data modeling techniques.
+- Excellent problem-solving skills with strong attention to detail.
+- Ability to communicate insights clearly to both technical and non-technical stakeholders.
+Skills
+Data Visualization Python Data Analysis Data Integrity Data Modeling Data Science Visualization Data Analyst Analyst Sql Business Analyst

@@ -1,0 +1,14 @@
+Full job description
+You can send your resume directly to
+hr@example-company.com
+Get in touch:
++91 9876500000
+
+* Requirement Analysis: Gather, analyze, and validate business and technical requirements from various stakeholders and ensure alignment with business objectives.
+
+Elicitation: Conduct interviews, workshops, surveys, and document analysis to effectively elicit and clarify requirements from stakeholders.
+Modeling: Develop models (e.g., process flows, data models, use cases, user stories) to represent requirements and business processes accurately.
+Verification & Validation: Ensure that requirements are complete, consistent, and meet the business needs through review, traceability, and user acceptance testing
+Methodology Development: Define, implement, and continuously improve business analysis frameworks, best practices, and standards to support project success.
+Stakeholder Collaboration: Act as a liaison between business users, development teams, and project managers to ensure smooth communication and effective solution delivery
+Documentation: Prepare clear, concise, and comprehensive business requirements documents (BRDs), functional specifications, and other related documentation.

@@ -1,0 +1,26 @@
+* Full job description
+
+Plan8 | Nagpur | Freshers welcome
+We’re looking for a curious developer to help build tools that automate BIM workflows and connect AI with Autodesk Revit.
+Your work:
+
+* Develop Revit plugins and automation scripts.
+* Connect AI assistants with Revit through APIs and MCP.
+* Explore automated modeling from point clouds and model quality checks.
+* Test and improve tools with our modeling team.
+
+What we’re looking for:
+
+* Basic programming skills in C# or Python.
+* Ability to debug code, solve problems and learn independently.
+* Students or recent graduates in Computer Science, IT, Civil Engineering or related fields.
+* Familiarity with Revit, Dynamo, APIs or AI integrations is a plus.
+
+Full-time offer may follow successful training, based on performance.
+You’ll work on practical tools used in real projects. Prior professional experience is not required.
+To apply: Share your CV and a coding project, GitHub link or demonstration of something you’ve built.
+Pay: ₹10,000.00 per month
+Benefits:
+
+* Flexible schedule
+* Paid time off

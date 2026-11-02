@@ -252,4 +252,10 @@ body.ai-open .scroll-up-btn{display:none!important}
 .experience .experience-item.active{background:crimson;border-color:crimson;transform:scale(1.02);box-shadow:0 30px 60px -28px crimson}
 .experience .experience-item.active h3,.experience .experience-item.active .company,.experience .experience-item.active ul li{color:#fff}
 .experience .experience-item.active .date,.experience .experience-item.active .tech-tags span{color:#fff;border-color:#fff}
-.experience .experience-item.active::before{background:crimson;transform:scale(1.55);box-shadow:0 0 0 2px #fff,0 0 0 9px rgba(220,20,60,.28),0 0 26px crimson}  
+.experience .experience-item.active::before{background:crimson;transform:scale(1.55);box-shadow:0 0 0 2px #fff,0 0 0 9px rgba(220,20,60,.28),0 0 26px crimson}
+
+/* ===== v9: chat header buttons, clear-text button ===== */
+.ai-head .ai-clear{margin:0 10px 0 auto;font:500 14px 'Poppins',sans-serif;color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:6px 14px;background:none;cursor:pointer;transition:.25s}
+.ai-head .ai-clear:hover{border-color:crimson;background:rgba(220,20,60,.2)}
+#fit-clear::before{content:"\00d7";font-size:22px;line-height:1;margin-right:2px;color:#ff8fa3}
+#fit-clear:hover::before{color:#fff}
