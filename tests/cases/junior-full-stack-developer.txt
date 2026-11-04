@@ -1,0 +1,1 @@
+Junior Full Stack Developer (0-2 years). Location: Nagpur. You will build web applications with React, Node.js and Express, using MongoDB and REST APIs. Version control with Git is required. TypeScript is a plus. Strong problem-solving skills and good communication.

@@ -1,0 +1,23 @@
+Key Responsibilities:
+
+• Answer a variety of analytical questions and create scenarios that train large language models to improve.
+
+• Analyze distributions of sales by month across locations to determine which location has grown the most and justify reasoning.
+
+• Solve logical puzzles by applying mathematical reasoning to train models on correct problem-solving approaches.
+
+• Break down complex content into smaller logical blocks to facilitate fine-tuning of AI models.
+
+• Validate claims made in content through online research to ensure accuracy in model training.
+
+Required Skills & Qualifications:
+
+• Strong analytical skills with a focus on mathematical reasoning and problem-solving.
+
+• Proficiency in English, including reading, writing, and comprehension, to break down and summarize content.
+
+• Ability to conduct online research to validate claims and gather relevant information.
+
+• Capacity to work with large language models to improve their accuracy and reasoning capabilities.
+
+• High school mathematics knowledge with the ability to apply it to real-world analytical questions.

@@ -1,0 +1,8 @@
+GenAI Engineer (freshers welcome)
+Requirements:
+- Strong Python skills
+- Hands-on with LLMs, RAG and prompt engineering
+- Experience with LangChain and vector databases such as Pinecone or FAISS
+- Basic knowledge of AWS
+Nice to have: fine-tuning experience
+Location: Pune, hybrid.

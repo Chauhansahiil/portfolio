@@ -88,10 +88,10 @@ var SKILLDATA=null;
   ['Data visualization',/data visuali[sz]ation|visuali[sz]ation tools?|dashboards?|business intelligence|\bBI tools?\b/i,'Power BI dashboard, Tableau and Seaborn.'],
   ['Excel',/\bexcel\b|\bpivot|vlookup|google sheets|ms excel/i,'Pivot tables (beginner to pro at KultureHire), VLOOKUP and data cleaning frameworks.'],
   ['Data cleaning and EDA',/data clean|clean(?:ing)?\b.{0,25}\bdata|\bpreprocess|exploratory|\beda\b|data prep|wrangl/i,'Cleaning and EDA in Pandas, and standardisation frameworks at KultureHire.'],
-  ['Statistics',/statistic|hypothesis|probability|a\/b test/i,'Statistics and Probability coursework.'],
+  ['Statistics',/statistic|hypothesis|probability|a\/b test|mathematic|\bmaths?\b|quantitative|numeracy/i,'Statistics and Probability coursework, and quantitative analysis in his projects.'],
   ['Machine learning',/machine learning|\bml\b|scikit|sklearn|feature engineering/i,'ML coursework (neural networks, reinforcement learning, NLP, computer vision) and feature engineering.'],
   ['Deep learning',/deep learning|pytorch|tensorflow|neural network/i,'NVIDIA Fundamentals of Deep Learning; PyTorch and TensorFlow in his skills.'],
-  ['GenAI / LLMs',/gen ?ai|generative ai|\bllms?\b|\brag\b|prompt engineering/i,'GenAI, LLM and RAG are in his skill set.'],
+  ['GenAI / LLMs',/gen ?ai|generative ai|\bllms?\b|\brag\b|prompt engineering|large language models?|\bai models?\b|\bchatbots?\b/i,'GenAI, LLM and RAG are in his skill set.'],
   ['NLP',/\bnlp\b|natural language processing/i,'NLP coursework.'],
   ['R',/(?:python|sql|sas|julia|stata)\s*(?:,|\/|and|or|&)\s*R(?![a-z])|\bR\s*(?:,|\/|programming|language|studio)/i,'R is listed in his programming skills.'],
   ['C++',/c\+\+/i,'C++ is listed in his programming skills.'],
@@ -103,7 +103,15 @@ var SKILLDATA=null;
   ['AWS',/\baws\b|amazon web/i,'AWS is listed in his cloud skills.'],
   ['CI/CD',/ci ?\/ ?cd/i,'CI/CD is listed in his skills.'],
   ['Git / GitHub',/\bgit\b|github/i,'His projects are public on GitHub.'],
-  ['Blockchain / Web3',/blockchain|web3|ethereum|smart contract/i,'Co-authored a published paper, MetaMask and Web3.js, and an Ethereum developer certificate.']];
+  ['Blockchain / Web3',/blockchain|web3|ethereum|smart contract/i,'Co-authored a published paper, MetaMask and Web3.js, and an Ethereum developer certificate.'],
+  ['Analytical and problem-solving skills',/analytical (?:skills?|questions?|thinking|reasoning|abilit\w*)|problem[- ]solving|logical (?:reasoning|thinking|puzzles?)|critical thinking|interpret data|identify (?:trends|patterns)|draw (?:meaningful )?(?:conclusions|insights)|data[- ]driven/i,'Analytical work in his Customer Trends project (SQL, Pandas, Power BI) and EDA.',0.6],
+  ['English',/\benglish\b|reading, writing|written and verbal|verbal and written/i,'He speaks English, Hindi and Marathi.',0.6],
+  ['Data analysis',/data analys[ie]s|analy[sz](?:e|ing) (?:large |complex )?(?:data|datasets|distributions|trends|numbers)|data analytics|analytics/i,'Data analysis with SQL, Python and Power BI in his Customer Trends project.',0.6],
+  ['Reporting',/(?:prepar|generat|creat|build|produc|deliver|develop|maintain|run)\w*\s+(?:\w+\s+){0,3}reports?\b|ad[- ]hoc (?:requests? for )?reports?|\bmis reports?|recurring reports?|reporting (?:and|&) analytics/i,'Excel and Power BI reporting, including a Power BI dashboard.',0.6],
+  ['Computer vision',/computer vision|opencv|image processing|\byolo\b/i,'Computer Vision and Deep Learning coursework.'],
+  ['Reinforcement learning',/reinforcement learning/i,'Reinforcement Learning coursework.'],
+  ['Big data concepts',/\bbig data\b/i,'Big Data Computing coursework.'],
+  ['Object-oriented programming',/object[- ]oriented|\boop\b/i,'Programming in Python, C++ and JavaScript.',0.6]];
  var GAP=[
   ['Looker / Looker Studio',/looker/i,'Power BI or Tableau'],['Qlik',/qlik/i,'Power BI or Tableau'],['Google Analytics',/google analytics|\bga4\b/i,'Excel and Power BI'],
   ['Spark / PySpark',/\bspark\b|pyspark/i,'Python, Pandas and SQL'],['Hadoop / Hive / Presto',/hadoop|\bhive\b|presto/i,'SQL and Snowflake'],['Kafka',/kafka/i,'Python and REST APIs'],
@@ -119,14 +127,30 @@ var SKILLDATA=null;
   ['UAT / verification and validation',/\buat\b|user acceptance|traceability/i,''],
   ['Agile / Scrum / Jira',/\bagile\b|\bscrum\b|\bjira\b|\bconfluence\b/i,''],
   ['ERP systems',/\berp\b/i,'SQL and Snowflake'],
-  ['Planning and forecasting software',/planning software|demand forecasting|inventory optimi[sz]ation|\bs&op\b|kinaxis|anaplan/i,'Excel and Python analysis']];
+  ['Planning and forecasting software',/planning software|demand forecasting|inventory optimi[sz]ation|\bs&op\b|kinaxis|anaplan/i,'Excel and Python analysis'],
+  ['Online research / fact-checking',/online research|fact[- ]?check|validate claims|verify (?:the )?(?:claims|accuracy)|research skills|conduct(?:ing)? research|market research|literature review/i,'a co-authored published research paper'],
+  ['AI model fine-tuning and annotation',/fine-?tun|\brlhf\b|model training|train(?:ing)? (?:large language |ai |ml )?models?|annotation|data labell?ing|labeling/i,'GenAI, LLM, PyTorch and TensorFlow'],
+  ['Customer / technical support',/customer (?:service|support|success)|front-?line|technical support|help ?desk|service desk|\btickets?\b|incident (?:management|resolution)|\bl[12] support/i,''],
+  ['Master data / bulk data operations',/master data|bulk uploads?|data entry|manual(?:ly)? updating data|data migration|data governance/i,'data cleaning in Excel, Power BI and Pandas'],
+  ['Data structures and algorithms',/data structures|\balgorithms?\b|leetcode/i,'C++ and Python programming'],
+  ['TypeScript / Next.js / Redux',/typescript|next\.?js|redux/i,'JavaScript and React'],
+  ['Testing / QA tools',/selenium|junit|pytest|unit tests?|test automation|\bqa\b|postman|cypress/i,''],
+  ['Microservices / system design',/microservices?|system design|distributed systems/i,'REST APIs and Node.js'],
+  ['Linux / shell scripting',/linux|\bbash\b|shell scripting/i,''],
+  ['GraphQL',/graphql/i,'REST APIs'],
+  ['MLOps / model deployment',/mlops|ml ops|model deployment|kubeflow|mlflow/i,'PyTorch and TensorFlow'],
+  ['LangChain / vector databases',/langchain|llamaindex|vector (?:database|db|store)s?|pinecone|chroma|faiss|hugging ?face/i,'GenAI, LLM and RAG'],
+  ['Agentic AI frameworks',/agentic|\bmcp\b|autogen|crewai|langgraph|ai agents?/i,'GenAI and LLM coursework'],
+  ['ETL / data warehousing',/\betl\b|\belt\b|data warehous|data pipelines?/i,'SQL and Snowflake'],
+  ['Excel VBA / Power Automate',/\bvba\b|\bmacros?\b|power apps|power automate/i,'Excel and Power BI']];
  var DOM=[
   ['BIM / Revit / CAD',[/revit/i,/\bbim\b/i,/dynamo/i,/autocad/i,/autodesk/i,/point clouds?/i]],
   ['manufacturing and supply chain operations',[/supply chain/i,/demand forecasting/i,/inventory/i,/procurement/i,/logistics/i,/planning software/i,/manufacturing/i,/plant operations?/i,/warehouse/i,/shop ?floor/i]],
   ['accounting and finance operations',[/\btally\b/i,/\bgst\b/i,/accounts payable|accounts receivable/i,/general ledger/i,/bookkeeping/i]],
   ['embedded and mechanical engineering',[/embedded/i,/firmware/i,/\bplc\b/i,/scada/i,/solidworks/i,/\bcnc\b/i]],
   ['sales and marketing',[/lead generation/i,/telecalling|cold calling/i,/\bseo\b/i,/social media/i,/sales targets?/i]],
-  ['healthcare and clinical work',[/clinical/i,/patient/i,/pharma/i,/hospital/i]]];
+  ['healthcare and clinical work',[/clinical/i,/patient/i,/pharma/i,/hospital/i]],
+  ['product lifecycle management (PLM) support',[/product life ?cycle|\bplm\b/i,/bill of materials|\bboms?\b/i,/master data/i,/cosmetics|skin ?care/i,/regulatory/i]]];
  SKILLDATA={SK:SK,GAP:GAP};
  var NUM={one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10};
  var PREF=/nice to have|preferred|good to have|bonus|desirable|an advantage|a plus\b|plus point|optional/i,HEAD=/^(required|requirements?|qualifications?|must have|responsibilit|what you|key |about you|skills|candidate profile|job description|duties)/i;
@@ -135,23 +159,26 @@ var SKILLDATA=null;
 
  var NOW=function(){return new Date()},MON=['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
  function li(n,t){return'<li><b>'+n+'</b><span>'+t+'</span></li>'}
- function show(h){out.innerHTML=h;out.hidden=false;out.scrollIntoView({behavior:calm?'auto':'smooth',block:'nearest'})}
+ function show(h){out.innerHTML=h;out.hidden=false;var b=$('#fit-ai');if(b)b.onclick=function(){openAI(true)};out.scrollIntoView({behavior:calm?'auto':'smooth',block:'nearest'})}
+ function pracHtml(pr){return'<div class="fit-prac"><h4>Practical fit</h4><ul>'+pr.map(function(p){return'<li class="'+p[0]+'"><i>'+({ok:'\u2713',warn:'!',info:'i'}[p[0]])+'</i><span>'+p[1]+'</span></li>'}).join('')+'</ul></div>'}
+ function ctaHtml(){return'<div class="fit-cta"><a class="pillbtn" href="'+resume+'"'+(resume[0]==='#'?'':' target="_blank" rel="noopener"')+'>Download resume</a><a class="pillbtn ghost" href="#contact">Contact Sahil</a><button type="button" class="pillbtn ghost" id="fit-ai">Ask the AI more</button></div>'}
  function note(m){return'<p class="fit-note">'+m+'</p>'}
  function fmt(n){return(Math.round(n*10)/10).toString()}
- var INT='His portfolio lists three internships, and his data analyst experience is the KultureHire internship (Sep \u2013 Oct 2024).';
- var SOFT=[['communication',/communicat/i],['stakeholder management',/stakeholder/i],['documentation',/documentation/i],['business acumen',/business acumen|business understanding/i],['attention to detail',/attention to detail/i],['problem solving',/problem[- ]solving/i],['teamwork',/team ?work|collaborat/i],['ownership',/\bownership\b/i],['leadership',/leadership|lead a team|mentor/i],['time management',/time management/i]];
+ var INT='His portfolio lists three internships, and his data analyst experience is the KultureHire internship (Sep \u2013 Oct 2024).',
+  INTG='His portfolio lists three internships: Full Stack Developer at Tenet (Dec 2024 \u2013 Jun 2025), Data Analyst at KultureHire (Sep \u2013 Oct 2024) and Python Programming at CodeSoft (Aug \u2013 Sep 2023).';
+ var SOFT=[['communication',/communicat/i],['stakeholder management',/stakeholder/i],['documentation',/documentation/i],['business acumen',/business acumen|business understanding/i],['attention to detail',/attention to detail/i],['teamwork',/team ?work|collaborat/i],['ownership',/\bownership\b/i],['leadership',/leadership|lead a team|mentor/i],['time management',/time management/i],['working across time zones',/time ?zones?|global teams|us and china|offshore/i],['working with senior management',/senior management|leadership team|c-level|senior stakeholders/i],['multitasking',/multi-?task|simultaneously manage|manage (?:a large and diverse number of )?tasks|prioriti[sz]/i],['relationship building',/build relationships|relationship[- ]building|people skills/i]];
  function clean(t){return t.replace(/\[([^\]]*)\]\([^)]*\)/g,'$1').replace(/https?:\/\/\S+/g,' ').replace(/[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g,' ').replace(/(?:\+\d{1,4}\s+){4,}\+?\d*/g,' ').replace(/(?:\+91[\s-]?)?[6-9]\d{9}\b/g,' ').replace(/\b(?:experiance|expreience|exprience|expirience)\b/gi,'experience').replace(/^\s*(?:name|phone|email|resume|upload file|cover letter|submit|apply now|apply|log in|sign up)\s*\*?\s*:?\s*$/gim,' ').replace(/^\s*data science,? analytics (?:&|and) machine learning\s*$/gim,' ')}
- function exp(t){var best=0,typo=0,mo=null,mtxt='',m,re=/(\d{1,2}|one|two|three|four|five|six|seven|eight|nine|ten)\s*\+?\s*(?:-|\u2013|to)?\s*(?:\d{1,2}|one|two|three|four|five|six|seven|eight|nine|ten)?\s*\+?\s*(?:years?|yrs?)\b/gi;
+ function exp(t){var best=0,typo=0,pref=0,mo=null,mtxt='',m,re=/(\d{1,2}|one|two|three|four|five|six|seven|eight|nine|ten)\s*\+?\s*(?:-|\u2013|to)?\s*(?:\d{1,2}|one|two|three|four|five|six|seven|eight|nine|ten)?\s*\+?\s*(?:years?|yrs?)\b/gi;
   while((m=re.exec(t))){var a=m[1].toLowerCase(),n=NUM[a]||parseInt(a,10);if(!n)continue;
    if(/(?:up to|upto|max(?:imum)?|less than|below|under|within|at most)\s*$/i.test(t.slice(Math.max(0,m.index-22),m.index)))continue;
    var ctx=t.slice(Math.max(0,m.index-70),m.index+m[0].length+70);
-   if(/experience|\bexp\b|background|track record|working as|worked/i.test(ctx)&&!/\bago\b|founded|established|in business/i.test(ctx)){if(n>15)typo=Math.max(typo,n);else best=Math.max(best,n)}}
+   if(/experience|\bexp\b|background|track record|working as|worked/i.test(ctx)&&!/\bago\b|founded|established|in business/i.test(ctx)){if(n>15)typo=Math.max(typo,n);else if(/preferred|desirable|a plus|nice to have|an advantage|not (?:a )?(?:requirement|mandatory)/i.test(t.slice(m.index+m[0].length,m.index+m[0].length+45)))pref=Math.max(pref,n);else best=Math.max(best,n)}}
   var hd=/^\s*(\d{1,2})\s*(?:-|\u2013|to)\s*(\d{1,2})\s*(?:years?|yrs?)\s*$/gim;
   while((m=hd.exec(t))){var l1=parseInt(m[1],10),h1=parseInt(m[2],10);if(l1>0&&h1<=15&&h1>=l1)best=Math.max(best,l1)}
   var rm=/(\d{1,2})\s*(?:-|\u2013|to)?\s*(\d{1,2})?\s*\+?\s*months?\b/gi;
   while((m=rm.exec(t))){var c2=t.slice(Math.max(0,m.index-60),m.index+m[0].length+40);
    if(/experience|\bexp\b/i.test(c2)&&!/notice|probation|stipend|contract|\bago\b/i.test(c2)){var lo=parseInt(m[1],10),hi=m[2]?parseInt(m[2],10):lo;mo=Math.max(mo||0,hi);mtxt=m[2]?lo+'\u2013'+hi:String(lo)}}
-  return{yrs:best,typo:typo,months:mo,mtxt:mtxt}}
+  return{yrs:best,typo:typo,pref:pref,months:mo,mtxt:mtxt}}
  function pay(t){if(/[$\u20ac\u00a3]|\busd\b|\beur\b|\bgbp\b|\baed\b/i.test(t))return null;
   var m=t.match(/(\d+(?:\.\d+)?)\s*(?:lpa|lakhs?|lacs?)?\s*(?:-|\u2013|to)\s*(\d+(?:\.\d+)?)\s*(?:lpa|lakhs?|lacs?)/i);
   if(m)return{lo:parseFloat(m[1]),hi:parseFloat(m[2]),txt:m[1]+' to '+m[2]+' LPA'};
@@ -170,11 +197,11 @@ var SKILLDATA=null;
   var india=/\b(india|nagpur|mumbai|navi mumbai|thane|pune|nashik|bengaluru|bangalore|hyderabad|delhi|noida|gurgaon|gurugram|chennai|kolkata|ahmedabad|jaipur|indore|kochi|chandigarh|coimbatore)\b/i,
    mh=/\b(maharashtra|mumbai|navi mumbai|thane|pune|nashik|nagpur|aurangabad)\b/i,
    abroad=/\b(usa|united states|uk|united kingdom|germany|berlin|munich|dubai|uae|singapore|canada|australia|netherlands|europe|london|ireland|sweden|switzerland|france|paris|japan|qatar|saudi)\b/i,hasIn=india.test(t),hasAb=abroad.test(t);
-  var fm=t.match(/(?:bachelor'?s?|master'?s?|b\.?tech|degree|graduates?|students?)\s*(?:degree\s*)?(?:in|of)\s+([^.\n]{3,160})/i);
+  var fm=t.match(/(?:bachelor'?s?|master'?s?|b\.?tech|degree|graduates?|students?)\s*(?:degree\s*)?in\s+([^.\n]{3,160})/i);
   if(fm){var fl=fm[1].replace(/\s+/g,' ').trim();if(fl.length>110)fl=fl.slice(0,107)+'...';
    if(/computer|information technology|\bit\b|artificial intelligence|\bai\b|data|statistic|any (?:stream|discipline|branch|field)|engineering|related field|equivalent/i.test(fm[1]))add('ok','Education: the description lists '+fl+'. Sahil holds a B.Tech in Artificial Intelligence, which is closest to Computer Science and IT.');
    else add('warn','Education: the description asks for a degree in '+fl+'. Sahil holds a B.Tech in Artificial Intelligence, so please check whether that field is accepted.')}
-  else if(/degree|bachelor|graduat|b\.?tech|qualification/i.test(t))add('ok','Education: Sahil holds a B.Tech in Artificial Intelligence from G H Raisoni College of Engineering and Management (2021 \u2013 2025).');
+  else if(/\bdegree\b(?!\s+of\b)|bachelor|graduat|b\.?tech/i.test(t))add('ok','Education: Sahil holds a B.Tech in Artificial Intelligence from G H Raisoni College of Engineering and Management (2021 \u2013 2025).');
   var bt=null,rb=/(20\d\d)\s*(?:-|\u2013|to|and|\/)\s*(20\d\d)/g,mm;
   while((mm=rb.exec(t))){var c=t.slice(Math.max(0,mm.index-80),mm.index+mm[0].length+80);if(/batch|passing year|pass(?:ed)? out|graduation year|graduat|passout/i.test(c)){bt=[Math.min(+mm[1],+mm[2]),Math.max(+mm[1],+mm[2])];break}}
   if(bt)add(bt[0]<=2025&&2025<=bt[1]?'ok':'warn','Graduation year: the role asks for the '+bt[0]+'\u2013'+bt[1]+' batches. Sahil graduated in 2025'+(bt[0]<=2025&&2025<=bt[1]?'.':', which is outside that range.'));
@@ -184,8 +211,9 @@ var SKILLDATA=null;
   var pc=t.match(/(?:minimum|min\.?|at least|aggregate|marks|percentage)[^.\n]{0,40}?(\d{2}(?:\.\d+)?)\s*%/i);
   if(pc)add('info','Marks: the role mentions at least '+pc[1]+'%. Sahil\'s portfolio shows a CGPA of 6.96 / 10.0, and the percentage depends on his university\'s conversion, so please ask him for the exact figure.');
   if(/\bnagpur\b/i.test(t))add('ok','Location: the role is in Nagpur, where Sahil is based.');
-  else if(hasIn&&!hasAb){var cy=(t.match(/\b(navi mumbai|mumbai|thane|pune|nashik|bengaluru|bangalore|hyderabad|delhi|noida|gurgaon|gurugram|chennai|kolkata|ahmedabad|jaipur|indore|kochi|chandigarh|coimbatore)\b/i)||[])[1];add('ok','Location: '+(cy?cy.replace(/\b\w/g,function(c){return c.toUpperCase()})+', India':'India')+'. Sahil is open to relocating to any city'+(mh.test(t)?', and he can join immediately for roles within Maharashtra':'')+'. He needs no visa for roles in India.')}
+  else if(hasIn&&(!hasAb||/(?:based|located|location:?|work(?:ing)? from)[^.\n]{0,25}india/i.test(t))){var cy=(t.match(/\b(navi mumbai|mumbai|thane|pune|nashik|bengaluru|bangalore|hyderabad|delhi|noida|gurgaon|gurugram|chennai|kolkata|ahmedabad|jaipur|indore|kochi|chandigarh|coimbatore)\b/i)||[])[1];add('ok','Location: '+(cy?cy.replace(/\b\w/g,function(c){return c.toUpperCase()})+', India':'India')+'. Sahil is open to relocating to any city'+(mh.test(t)?', and he can join immediately for roles within Maharashtra':'')+'. He needs no visa for roles in India.')}
   else if(hasAb&&!hasIn)add('warn','Location: this role appears to be outside India. Sahil would need visa sponsorship for it.');
+  else if(hasAb&&hasIn)add('info','Location: the description mentions both India and another country. Please check where the role is based.');
   var wm=[];if(/work from office|\bwfo\b|on-?site|in-?office|in[- ]person/i.test(t))wm.push('on-site');if(/hybrid/i.test(t))wm.push('hybrid');if(/remote|work from home|\bwfh\b/i.test(t))wm.push('remote');
   if(wm.length)add('ok','Work mode: '+wm.join(' / ')+'. Sahil is fine with remote, hybrid or on-site work.');
   var jn=t.match(/immediate(?:ly)?\s*(?:to|-|\u2013)\s*(\d{1,3})\s*days/i),up=t.match(/(?:notice period|joining|join)[^.\n]{0,40}?(?:up to|upto|max(?:imum)?|within|not more than)\s*(\d{1,3})\s*days/i);
@@ -199,7 +227,7 @@ var SKILLDATA=null;
   var ce=t.match(/pl-?300|az-?900|dp-?900|dp-?203|aws certified[^.\n]{0,25}|tableau (?:desktop )?(?:specialist|certified|certification)|google data analytics|\bpmp\b|\bcfa\b|six sigma|scrum master|cissp|\bccna\b/i);
   if(ce)add('warn','Certification: the description mentions '+ce[0].trim()+', which is not on his list (Accenture, IBM, NVIDIA and Indian Blockchain Institute).');
   if(/github|coding project|portfolio projects?/i.test(t)&&/apply|share|submit|send|strengthen/i.test(t))add('ok','Application: the description asks for or welcomes a GitHub link or project work. Sahil has public projects on GitHub (github.com/Chauhansahiil).');
-  var un=[];if(/\bshifts?\b/i.test(t))un.push('shift timings');if(/service bond|bond period|\bbond\b/i.test(t))un.push('a service bond');if(/\btravel/i.test(t))un.push('travel');if(/case study|assignment|coding test|take-?home/i.test(t))un.push('a test or assignment');
+  var un=[];if(/\bshifts?\b/i.test(t))un.push('shift timings');if(/service bond|bond period|\bbond\b/i.test(t))un.push('a service bond');if(/\btravel/i.test(t))un.push('travel');if(/case study|assignment|coding test|take-?home/i.test(t))un.push('a test or assignment');if(/time ?zones?|flexible working hours|flexible hours/i.test(t))un.push('working hours across time zones');
   if(un.length)add('info','The description mentions '+un.join(', ')+'. His portfolio does not cover this, so please ask him directly.');
   var now=NOW(),today=new Date(now.getFullYear(),now.getMonth(),now.getDate()),shown=false;
   dates(t).forEach(function(d){if(/clos|deadline|last date|apply by|valid (?:till|until)|expires?/i.test(d.ctx)){if(d.dt<today)add('warn','Closing date: the posting says applications close on '+d.txt+', which has passed.')}else if(!shown&&d.dt.getFullYear()<=now.getFullYear()-1){add('info','Posting date: this description is dated '+d.txt+', so the role may no longer be open.');shown=true}});
@@ -222,23 +250,24 @@ var SKILLDATA=null;
   var hit=SK.filter(function(s){return cls[s[0]]}),miss=GAP.filter(function(s){return cls[s[0]]}),dom=domains(t);
   if(hit.some(function(s){return s[0]==='Power BI / DAX'||s[0]==='Tableau'}))hit=hit.filter(function(s){return s[0]!=='Data visualization'});
   if(!hit.length&&!miss.length){var nt=/nurse|doctor|physician|driver|mechanic|electrician|plumber|chef|waiter|teacher|accountant|cashier|warehouse|civil engineer|mechanical engineer|security guard|sales executive|retail/i.test(t);
-   return show(note(dom?'This role is centred on '+dom+', which is outside Sahil\'s listed experience, and I could not recognise any tools here that I can compare with his profile.':(nt?'This looks like a role outside data, AI and software, so Sahil\'s profile is not a match for it.':'I could not recognise any tools or skills here that I can compare with Sahil\'s profile. It may not be a technical job description, or it may use terms I do not check. Please read it yourself or ask Sahil directly.')))}
+   var p0=prac(t);return show(note(dom?'This role is centred on '+dom+', which is outside Sahil\'s listed experience, and I could not match any tools or skills here against his profile.':(nt?'This looks like a role outside data, AI and software, so Sahil\'s profile is not a match for it.':'This description does not name tools or skills that I can compare with Sahil\'s profile, so I cannot give a skills verdict. Please read it yourself or ask Sahil directly.'))+(p0.length?pracHtml(p0):'')+ctaHtml())}
   var x0=exp(t),yrs=x0.yrs,senior=/\bsenior\b|\bprincipal\b|\bstaff\b|\bhead of\b|\bdirector\b|\bmanager\b|\blead\b|\barchitect\b/i.test(t.slice(0,160)),
    fresher=/fresher|entry[- ]level|trainee|junior|campus hire|recent graduate|fresh graduate|new graduate|0\s*(?:-|\u2013|to)\s*[12]\s*years?|(?:prior |previous )?(?:professional )?experience (?:is )?not (?:required|needed)|no (?:prior )?experience (?:required|needed)|up to \d+ years? of/i.test(t)||(x0.months!==null&&x0.months<=12),
    masters=/(?:master'?s|\bm\.?sc\b|\bm\.?tech\b|post[- ]?graduate|\bph\.?d\b|doctorate)[^.\n]{0,40}(?:required|mandatory|preferred|degree)|(?:required|mandatory|preferred)[^.\n]{0,40}(?:master'?s|\bm\.?sc\b|\bm\.?tech\b|post[- ]?graduate|\bph\.?d\b|doctorate)/i.test(t);
   var rh=hit.filter(function(s){return cls[s[0]]==='req'}),rm=miss.filter(function(s){return cls[s[0]]==='req'}),rt=rh.length+rm.length;
-  var bt=hit.length+miss.length,ratio=rt?rh.length/rt:hit.length/bt,sk=ratio>=.7?'ok':(ratio>=.4?'warn':'bad');
+  var bt=hit.length+miss.length,W=function(l){return l.reduce(function(a,s){return a+(s[3]||1)},0)},ratio=rt?W(rh)/(W(rh)+rm.length):W(hit)/(W(hit)+miss.length),sk=ratio>=.7?'ok':(ratio>=.4?'warn':'bad');
   var ex=(yrs>=4||(senior&&yrs>=3))?'bad':((yrs>=2||senior)?'warn':'ok'),edge=(yrs===1&&!fresher&&ex==='ok');
   var lv=(sk==='bad'||ex==='bad')?'bad':((sk==='warn'||ex==='warn'||edge)?'warn':'ok');
   var title={ok:'Good match',warn:'Partial match',bad:'Not a match yet'}[lv];
   if(ex==='bad'&&sk!=='bad')title='Too senior for now';else if(ex==='warn'&&sk==='ok')title='A stretch on experience';else if(edge&&sk==='ok')title='Good skills match, experience at the edge';
   if(dom&&ex!=='bad'){if(sk==='ok'){lv='warn';title='Skills overlap, different domain'}else if(sk==='warn'){lv='warn';title='Partial match: domain knowledge needed'}}
-  var pr=prac(t),parts=[];
+  var pr=prac(t),parts=[],ana=hit.some(function(s){return /^(SQL|Power BI|Tableau|Excel|Data analysis|Reporting|Statistics|Data visualization|Data cleaning)/.test(s[0])}),INTX=ana?INT:INTG;
   parts.push(rt?('Required skills: '+rh.length+' of '+rt+' are on Sahil\'s list.'):('Skills mentioned: '+hit.length+' of '+bt+' are on Sahil\'s list.'));
-  if(yrs>=1)parts.push('The description asks for '+yrs+'+ years of experience. Sahil graduated in 2025. '+INT+' His portfolio does not show a full year in an analyst role.');
-  else if(x0.months!==null)parts.push('The description asks for '+x0.mtxt+' months of experience, so it suits freshers. Sahil graduated in 2025. '+INT);
-  else if(fresher)parts.push('The description looks suitable for freshers and juniors. Sahil graduated in 2025. '+INT);
-  else parts.push('No minimum experience is stated. Sahil graduated in 2025. '+INT);
+  if(yrs>=1)parts.push('The description asks for '+yrs+'+ years of experience. Sahil graduated in 2025. '+INTX+(ana?' His portfolio does not show a full year in an analyst role.':' None of his internships runs for a full year.'));
+  else if(x0.months!==null)parts.push('The description asks for '+x0.mtxt+' months of experience, so it suits freshers. Sahil graduated in 2025. '+INTX);
+  else if(fresher)parts.push('The description looks suitable for freshers and juniors. Sahil graduated in 2025. '+INTX);
+  else if(x0.pref)parts.push('The description prefers about '+x0.pref+' year'+(x0.pref>1?'s':'')+' of experience but does not require it. Sahil graduated in 2025. '+INTX);
+  else parts.push('No minimum experience is stated. Sahil graduated in 2025. '+INTX);
   if(dom)parts.push('The role is centred on '+dom+', which is outside Sahil\'s listed experience.');
   if(fresher&&sk!=='ok')parts.push('The role is open to freshers, but its main requirements listed here are not yet shown on his portfolio.');
   if(lv==='ok')parts.push('This reads as a reasonable fit for his current level.');
@@ -247,7 +276,7 @@ var SKILLDATA=null;
   var h='<div class="fit-verdict '+lv+'"><b>'+title+'</b><span>'+parts.join(' ')+'</span></div><div class="fit-cols">'+
    '<div class="fit-col ok"><h4>Where he fits</h4><ul>'+(hit.length?hit.map(function(s){return li(s[0]+(cls[s[0]]==='pref'?' (nice to have)':''),s[2])}).join(''):'<li><span>No direct matches found.</span></li>')+'</ul></div>'+
    '<div class="fit-col no"><h4>Not on his list yet</h4><ul>'+(miss.length?miss.map(function(s){return li(s[0]+(cls[s[0]]==='pref'?' (nice to have)':''),s[2]?'Not listed. Closest he works with: '+s[2]+'.':'Not listed on his portfolio.')}).join(''):'<li><span>None of the tools I check for.</span></li>')+'</ul></div></div>';
-  if(pr.length)h+='<div class="fit-prac"><h4>Practical fit</h4><ul>'+pr.map(function(p){return'<li class="'+p[0]+'"><i>'+({ok:'\u2713',warn:'!',info:'i'}[p[0]])+'</i><span>'+p[1]+'</span></li>'}).join('')+'</ul></div>';
+  if(pr.length)h+=pracHtml(pr);
   var ns=[],sf=SOFT.filter(function(s){return s[1].test(t)}).map(function(s){return s[0]});
   if(/advanced excel/i.test(t))ns.push('It asks for Advanced Excel. He lists pivot tables and VLOOKUP, and whether that counts as advanced is something he can show in an interview.');
   if(x0.typo)ns.push('The description mentions '+x0.typo+' years of experience, which looks like a typo (for example 2\u20135). Please check the original posting.');
@@ -255,7 +284,7 @@ var SKILLDATA=null;
   if(senior)ns.push('The title sounds senior, which may involve ownership or leading others.');if(masters)ns.push('It mentions a master\'s degree or PhD as required or preferred. Sahil holds a B.Tech.');
   ns.push('This is a keyword comparison against his portfolio, not a hiring decision, so please read the full description too.');
   h+='<ul class="fit-notes">'+ns.map(function(x){return'<li>'+x+'</li>'}).join('')+'</ul>';
-  h+='<div class="fit-cta"><a class="pillbtn" href="'+resume+'"'+(resume[0]==='#'?'':' target="_blank" rel="noopener"')+'>Download resume</a><a class="pillbtn ghost" href="#contact">Contact Sahil</a><button type="button" class="pillbtn ghost" id="fit-ai">Ask the AI more</button></div>';
+  h+=ctaHtml();
   show(h);var b=$('#fit-ai');if(b)b.onclick=function(){openAI(true)}}
  out.addEventListener('pointermove',function(ev){var el=ev.target.closest?ev.target.closest('.fit-col,.fit-prac'):null;if(!el)return;var q=el.getBoundingClientRect();el.style.setProperty('--mx',(ev.clientX-q.left)+'px');el.style.setProperty('--my',(ev.clientY-q.top)+'px')});
  $('#fit-clear').onclick=function(){inp.value='';cnt();out.hidden=true;out.innerHTML='';inp.focus()};

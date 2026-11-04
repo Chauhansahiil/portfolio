@@ -15,9 +15,9 @@ var CASES=[
  {f:'solarsquare-ba-data-viz.txt',title:'A stretch on experience',has:['2+ years','looks like a typo','Posting age'],not:['25+ years']},
  {f:'adityabirla-tm-data-analytics.txt',title:'Partial match: domain knowledge needed',has:['manufacturing and supply chain','ERP','Posting age'],not:['Too senior']},
  {f:'business-analyst-0-6-months.txt',title:'Not a match yet',has:['0\u20136 months','1.8 to 2.4 LPA','above the top','Requirements gathering'],not:['Good match']},
- {f:'click2cloud-business-analyst.txt',title:'Not a match yet',has:['Requirements gathering','Business process'],not:['7263975000','talent@']},
- {f:'plan8-revit-developer.txt',title:'Skills overlap, different domain',has:['BIM / Revit / CAD','1.2 LPA','GitHub'],not:['C# / .NET']},
- {f:'masycoda-supply-chain-analyst.txt',title:'Not a match yet',has:['manufacturing and supply chain','Planning and forecasting','May 8, 2024'],not:['Good match']},
+ {f:'click2cloud-business-analyst.txt',title:'Not a match yet',has:['Requirements gathering','Business process'],not:['9876500000','hr@example-company.com']},
+ {f:'plan8-revit-developer.txt',title:'Partial match: domain knowledge needed',has:['BIM / Revit / CAD','Agentic AI frameworks','1.2 LPA','GitHub'],not:['C# / .NET']},
+ {f:'masycoda-supply-chain-analyst.txt',title:'Partial match: domain knowledge needed',has:['manufacturing and supply chain','Planning and forecasting','May 8, 2024'],not:['Good match']},
  {f:'senior-ml-engineer.txt',title:'Too senior for now',has:['6+ years','master\'s degree'],not:['Good match']},
  {f:'staff-nurse.txt',msg:'healthcare and clinical work'},
  {f:'berlin-data-analyst.txt',has:['outside India','visa sponsorship','German'],not:['EUR 50,000 is stated','Pay:']},
@@ -26,7 +26,13 @@ var CASES=[
  {f:'junior-analyst-fresher.txt',title:'Good match',has:['Pune','3 to 4 LPA','above the top of that range'],not:['Too senior']},
  {f:'one-to-three-years.txt',title:'Good skills match, experience at the edge',has:['1+ years','allows up to 30 days','Mumbai']},
  {f:'pasted-with-phone-numbers.txt',title:'Good match',has:['2.5 to 3.5 LPA','above the top of that range'],not:['9876543210','example.com']},
- {f:'several-pasted-together.txt',msg:'more than one job description'},  
+ {f:'ai-training-annotation.txt',title:'Partial match',has:['GenAI / LLMs','English','Online research / fact-checking','AI model fine-tuning'],not:['could not','does not name']},
+ {f:'digital-operations-plm.txt',title:'Partial match: domain knowledge needed',has:['product lifecycle management (PLM) support','Customer / technical support','Location: India','time zones'],not:['accountability','Good match']},
+ {f:'junior-full-stack-developer.txt',title:'Good match',has:['JavaScript / React','TypeScript','Nagpur','Full Stack Developer at Tenet'],not:['analyst role']},
+ {f:'genai-engineer-fresher.txt',title:'Good match',has:['LangChain / vector databases','Pune'],not:['Too senior']},
+ {f:'customer-support-executive.txt',title:'Not a match yet',has:['Customer / technical support','prefers about 1 year','above the top of that range'],not:['asks for 1+','working with senior management']},
+ {f:'operations-analyst-excel.txt',title:'Good skills match, experience at the edge',has:['Reporting','Advanced Excel']},
+ {f:'several-pasted-together.txt',msg:'more than one job description'},
  {f:'junk-form-only.txt',msg:'too short'}];
 var bad=0;
 if(process.argv[2]==='--show'){CASES.forEach(function(c){mk('#fit-in').value=text(c.f);mk('#fit-run').onclick();var h=mk('#fit-out').innerHTML.replace(/<li class="(\w+)"><i>[^<]*<\/i><span>/g,'\n   [$1] ').replace(/<li><b>/g,'\n   - ').replace(/<\/b><span>/g,': ').replace(/<\/(?:h4|div|ul|p)>/g,'\n').replace(/<[^>]+>/g,' ').replace(/[ ]+/g,' ');console.log('=== '+c.f+'\n'+h)});process.exit(0)}
