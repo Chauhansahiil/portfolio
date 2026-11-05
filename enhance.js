@@ -47,7 +47,7 @@ $$('.edu-row').forEach(function(r){var s=$('.edu-score',r);if(!s)return;var t=s.
   new IntersectionObserver(function(es,o){es.forEach(function(x){if(x.isIntersecting){setTimeout(function(){d.classList.add('on')},350);o.disconnect()}})},{threshold:.5}).observe(d)});
 
 /* magnetic buttons */
-if(fine&&!calm)$$('.home-content a,.about-btns a,.button-area button,#ai-fab').forEach(function(b){
+if(fine&&!calm)$$('.home-content a,.about-btns a,.button-area button').forEach(function(b){
   b.addEventListener('pointermove',function(e){var r=b.getBoundingClientRect();b.style.translate=((e.clientX-r.left-r.width/2)*.25)+'px '+((e.clientY-r.top-r.height/2)*.3)+'px'});
   b.addEventListener('pointerleave',function(){b.style.translate=''})});
 
@@ -287,9 +287,14 @@ var SKILLDATA=null;
   h+=ctaHtml();
   show(h);var b=$('#fit-ai');if(b)b.onclick=function(){openAI(true)}}
  out.addEventListener('pointermove',function(ev){var el=ev.target.closest?ev.target.closest('.fit-col,.fit-prac'):null;if(!el)return;var q=el.getBoundingClientRect();el.style.setProperty('--mx',(ev.clientX-q.left)+'px');el.style.setProperty('--my',(ev.clientY-q.top)+'px')});
- $('#fit-clear').onclick=function(){inp.value='';cnt();out.hidden=true;out.innerHTML='';inp.focus()};
- $('#fit-run').onclick=run;$('#fit-sample').onclick=function(){inp.value=SAMPLE;cnt();run()};
- function cnt(){$('#fit-count').textContent=inp.value.length+' / 6000'}inp.addEventListener('input',cnt)})();
+ var runB=$('#fit-run'),clrB=$('#fit-clear'),smpB=$('#fit-sample'),used=false;
+ function setOn(b,on){if(b)b.hidden=!on}
+ function sync(){var has=inp.value.trim().length>0;setOn(runB,has);setOn(clrB,has);setOn(smpB,!has&&!used)}
+ function cnt(){$('#fit-count').textContent=inp.value.length+' / 6000';sync()}
+ clrB.onclick=function(){inp.value='';cnt();out.hidden=true;out.innerHTML='';inp.focus()};
+ runB.onclick=run;
+ smpB.onclick=function(){used=true;inp.value=SAMPLE;cnt();run()};
+ inp.addEventListener('input',cnt);sync()})();
 
 /* ---------- AI assistant (answers come from your own portfolio content) ---------- */
 var A=function(h,t){return'<a href="'+h+'"'+(h[0]==='#'?'':' target="_blank" rel="noopener"')+'>'+t+'</a>'};
@@ -410,7 +415,8 @@ function openAI(v){box.hidden=!v;document.body.classList.toggle('ai-open',v);$('
 (function(){msgs.setAttribute('aria-live','polite');
   CH.forEach(function(c){var b=document.createElement('button');b.type='button';b.textContent=c;b.onclick=function(){ask(c)};$('#chips').appendChild(b)});
   var n=document.createElement('p');n.className='ai-note';n.textContent='AI answers are based on Sahil\'s portfolio and may be imperfect.';box.insertBefore(n,$('#ai-form'));
-  $('#ai-x').innerHTML='&times; Close';var c=document.createElement('button');c.type='button';c.className='ai-clear';c.textContent='Clear';c.onclick=greet;$('.ai-head').insertBefore(c,$('#ai-x'))})();
+  $('#ai-clear').onclick=greet;
+  var fab=$('#ai-fab');if(fab&&!calm){fab.classList.add('intro');setTimeout(function(){fab.classList.remove('intro')},5000)}})();
 $$('[data-open-ai]').forEach(function(b){b.addEventListener('click',function(ev){ev.preventDefault();openAI(true)})});
 $('#ai-x').onclick=function(){openAI(false)};
 $('#ai-form').addEventListener('submit',function(e){e.preventDefault();ask(inp.value);inp.value=''});
