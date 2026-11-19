@@ -35,16 +35,18 @@ $(document).ready(function(){
 
     // typing text animation script
     var typed = new Typed(".typing", {
-        strings: ["Aspiring Data Analyst"],
-        typeSpeed: 100,
-        backSpeed: 60,
+        strings: ["AI Graduate", "Aspiring Data Analyst", "Aspiring GenAI Engineer", "Aspiring Software Developer"],
+        typeSpeed: 90,
+        backSpeed: 50,
+        backDelay: 1400,
         loop: true
     });
 
     var typed = new Typed(".typing-2", {
-        strings: ["Aspiring Data Analyst with an AI background"],
-        typeSpeed: 100,
-        backSpeed: 60,
+        strings: ["AI graduate open to Data, GenAI and Software roles", "Turning data and code into useful products"],
+        typeSpeed: 70,
+        backSpeed: 40,
+        backDelay: 1800,
         loop: true
     });
 

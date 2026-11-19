@@ -43,13 +43,17 @@ export default {
       "Vary": "Origin"
     };
     const reply = (obj, status = 200) =>
-      new Response(JSON.stringify(obj), { status, headers: { ...cors, "Content-Type": "application/json" } });
+      new Response(JSON.stringify(obj), { status, headers: { ...cors, "Content-Type": "application/json", "X-Content-Type-Options": "nosniff", "Cache-Control": "no-store" } });
 
     if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
 
     if (url.pathname === "/resume" && req.method === "GET") {
-      if (!env.RESUME_URL) return reply({ error: "not configured" }, 503);
-      return Response.redirect(env.RESUME_URL, 302);
+      // Optional role-specific resumes: RESUME_URL_DATA, RESUME_URL_AI, RESUME_URL_SOFTWARE. Falls back to RESUME_URL.
+      const role = (url.searchParams.get("role") || "").toLowerCase();
+      const byRole = new Map([["data", env.RESUME_URL_DATA], ["ai", env.RESUME_URL_AI], ["software", env.RESUME_URL_SOFTWARE]]);
+      const target = byRole.get(role) || env.RESUME_URL;
+      if (!target) return reply({ error: "not configured" }, 503);
+      return Response.redirect(target, 302);
     }
 
     if (url.pathname === "/contact" && req.method === "POST") {

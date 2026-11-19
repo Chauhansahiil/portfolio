@@ -364,3 +364,20 @@ body.ai-open .scroll-up-btn{display:none!important}
  #fit-report .rp-foot{border-top:1px solid #ddd;padding-top:8px;font-size:11px;color:#444}
  #fit-report .rp-foot p{margin:0 0 4px}
 }
+
+/* ===== v16: role picker, highlighted work, role resumes ===== */
+.role-pick{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:22px}
+.role-pick>span{font-size:14px;color:rgba(255,255,255,.85);margin-right:4px;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.role-pick button{font:500 13.5px 'Poppins',sans-serif;color:#fff;cursor:pointer;border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:7px 15px;background:rgba(12,12,16,.62);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);transition:transform .25s,border-color .25s,background .25s,box-shadow .25s}
+.role-pick button:hover{border-color:#ff8fa3;transform:translateY(-2px)}
+.role-pick button.on{background:linear-gradient(135deg,#ff3b63,crimson);border-color:transparent;box-shadow:0 10px 24px -10px crimson}
+.role-pick button.rp-reset{background:none;border-style:dashed;color:rgba(255,255,255,.8);font-size:12.5px}
+.role-pick button[hidden]{display:none}
+.about .role-pick{margin:0 0 6px;width:100%}
+.about .role-pick>span{color:rgba(255,255,255,.7);text-shadow:none}
+.role-dim{opacity:.42;filter:saturate(.55);transition:opacity .5s ease,filter .5s ease}
+.role-dim:hover{opacity:.9;filter:none}
+.role-match{transition:opacity .5s ease,filter .5s ease}
+.services .card.role-match,.experience-item.role-match{position:relative}
+.rel-badge{position:absolute;top:14px;right:14px;z-index:3;font:600 11px 'Poppins',sans-serif;letter-spacing:.3px;color:#fff;background:linear-gradient(135deg,#ff3b63,crimson);padding:4px 11px;border-radius:999px;box-shadow:0 8px 18px -8px crimson;pointer-events:none}
+@media(max-width:500px){.role-pick button{font-size:12.5px;padding:6px 12px}.role-pick>span{width:100%}}

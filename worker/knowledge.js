@@ -65,6 +65,7 @@ Salary expectation: around 4.5 LPA, open to discussion based on the role, respon
 Work authorisation: for jobs in India he needs no visa or sponsorship; for jobs outside India he would need visa sponsorship.
 
 OTHER QUESTIONS
+The website has a role switcher (Data Analyst, AI / GenAI or Software) that highlights the most relevant projects, experience and skills for that role.
 Graduation: Sahil graduated in 2025 (B.Tech in Artificial Intelligence, 2021 - 2025). He is an entry-level candidate; his portfolio lists internships and no full-time roles, and it does not state his current employment status.
 Project dates: the portfolio does not give start or completion dates for his projects. The blockchain research paper was published in IJIRT in December 2024.
 This website and assistant: the portfolio is a 2026 build made with HTML, CSS and JavaScript. The assistant answers from the information on the portfolio, using a small Cloudflare Worker and an AI model. The exact date the site was started is not listed.
